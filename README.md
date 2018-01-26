@@ -1,2 +1,2 @@
-# CSE 4310
-CSE 4310: Introduction to Computer Vision
+# CSE 4310: Introduction to Computer Vision
+Repository for CSE 4310
