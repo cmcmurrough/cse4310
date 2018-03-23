@@ -29,7 +29,7 @@ Earning a grade of "A" in the class will be difficult, but not impossible. Stude
 11. Registration
 12. Performance considerations
 13. Parallel Processing
-14. and more!
+14. Emerging technologies
 
 ## Libraries used (basic skills you can add to your resume):
 1. OpenCV
