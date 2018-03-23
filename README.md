@@ -1,5 +1,4 @@
 # CSE 4310: Introduction to Computer Vision
-Repository for CSE 4310
 
 :boom::boom::boom: THIS CLASS WON'T BE EASY, BUT YOU WILL LEARN TO DO REALLY COOL STUFF! :boom::boom::boom:
 
