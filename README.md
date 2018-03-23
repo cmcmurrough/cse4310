@@ -14,7 +14,7 @@ My goal as the instructor of this class is to instill as many computer/machine v
 Earning a grade of "A" in the class will be difficult, but not impossible. Students achieving this honor should consider computer vision as a possible career path.
 
 
-Some topics to be covered:
+## Some topics to be covered:
 1. Introduction to state-of-the-art computer vision techniques and applications
 2. Programming environment setup
 3. Data acquisition and display
@@ -26,7 +26,7 @@ Some topics to be covered:
 9. Parelell Processing
 10. etc...
 
-Libraries used (basic skills you can add to your resume):
+## Libraries used (basic skills you can add to your resume):
 1. OpenCV
 2. Point Cloud Library
 3. CUDA
