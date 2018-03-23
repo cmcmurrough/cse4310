@@ -18,17 +18,20 @@ Earning a grade of "A" in the class will be difficult, but not impossible. Stude
 1. Introduction to state-of-the-art computer vision techniques and applications
 2. Programming environment setup
 3. Data acquisition and display
-4. Thresholding...
-5. Blablabal....
-6. Depth and 3D sensing techniques and hardware
-7. Point Cloud Library...
-8. Performance considerations
-9. Parelell Processing
-10. etc...
+4. Image thresholding
+5. Morphology
+6. Motion detection & tracking
+7. Object recognition
+8. Optical character recognition
+9. Depth and 3D sensing techniques and hardware
+19. Point clouds
+10. Segmentation
+11. Registration
+12. Performance considerations
+13. Parallel Processing
+14. and more!
 
 ## Libraries used (basic skills you can add to your resume):
 1. OpenCV
 2. Point Cloud Library
 3. CUDA
-
-
