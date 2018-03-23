@@ -31,7 +31,7 @@ Earning a grade of "A" in the class will be difficult, but not impossible. Stude
 13. Parallel Processing
 14. Emerging technologies
 
-## Libraries used (basic skills you can add to your resume):
+## Libraries and frameworks
 1. OpenCV
 2. Point Cloud Library
 3. CUDA
