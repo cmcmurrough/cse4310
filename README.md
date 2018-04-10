@@ -22,6 +22,7 @@ Earning a grade of "A" in the class will be difficult, but not impossible. Stude
 6. Motion detection & tracking
 7. Object recognition
 8. Optical character recognition
+9. Camera calibration and fiducial markers
 9. Depth and 3D sensing techniques and hardware
 19. Point clouds
 10. Segmentation
