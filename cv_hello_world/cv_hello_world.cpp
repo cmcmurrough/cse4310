@@ -48,10 +48,10 @@ int main(int argc, char **argv)
     else
     {
 		cv::Mat imageIn;
-		imageIn = cv::imread(argv[1], cv::CV_LOAD_IMAGE_COLOR);
+		imageIn = cv::imread(argv[1], CV_LOAD_IMAGE_COLOR);
 		
 		// check for file error
-		if(!image.data)
+		if(!imageIn.data)
 		{
 			std::cout << "Error while opening file " << argv[1] << std::endl;
 			return 0;
