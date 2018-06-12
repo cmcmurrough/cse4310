@@ -8,3 +8,6 @@ find_package(OpenCV REQUIRED)
 add_executable(cv_containers cv_containers.cpp)
 target_link_libraries(cv_containers ${OpenCV_LIBS})
 
+add_executable(cv_clickable cv_clickable.cpp)
+target_link_libraries(cv_clickable ${OpenCV_LIBS})
+

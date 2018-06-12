@@ -16,8 +16,8 @@
 //
 
 /*******************************************************************************************************************//**
- * @file cv_containers.cpp
- * @brief C++ example of basic image containers in OpenCV
+ * @file cv_clickable.cpp
+ * @brief C++ example of basic interaction with an image in OpenCV
  * @author Christopher D. McMurrough
  **********************************************************************************************************************/
 
@@ -25,6 +25,39 @@
 #include <iostream>
 #include <string>
 #include "opencv2/opencv.hpp"
+
+// function prototypes
+static void clickCallback(int event, int x, int y, int flags, void* userdata);
+
+/*******************************************************************************************************************//**
+ * @brief handler for image click callbacks
+ * @param[in] event number of command line arguments
+ * @param[in] x string array of command line arguments
+ * @param[in] y string array of command line arguments
+ * @param[in] flags string array of command line arguments
+ * @param[in] userdata string array of command line arguments
+ * @return return code (0 for normal termination)
+ * @author Christoper D. McMurrough
+ **********************************************************************************************************************/
+static void clickCallback(int event, int x, int y, int flags, void* userdata)
+{
+    if(event == cv::EVENT_LBUTTONDOWN)
+    {
+        std::cout << "LEFT CLICK (" << x << ", " << y << ")" << std::endl;
+    }
+    else if(event == cv::EVENT_RBUTTONDOWN)
+    {
+        std::cout << "RIGHT CLICK (" << x << ", " << y << ")" << std::endl;
+    }
+    else if(event == cv::EVENT_MBUTTONDOWN)
+    {
+        std::cout << "MIDDLE CLICK (" << x << ", " << y << ")" << std::endl;
+    }
+    else if(event == cv::EVENT_MOUSEMOVE)
+    {
+        std::cout << "MOUSE OVER (" << x << ", " << y << ")" << std::endl;
+    }
+}
 
 /*******************************************************************************************************************//**
  * @brief program entry point
@@ -47,57 +80,9 @@ int main(int argc, char **argv)
 		return 0;
 	}
 	
-	// get the image size
-	std::cout << "image width: " << imageIn.cols << std::endl;
-	std::cout << "image height: " << imageIn.rows << std::endl;
-	std::cout << "image channels: " << imageIn.channels() << std::endl;
-	
-	// get the image size using the size() member function
-	std::cout << "image width: " << imageIn.size().width << std::endl;
-	std::cout << "image height: " << imageIn.size().height << std::endl;
-
     // display the input image
 	cv::imshow("imageIn", imageIn);
-	cv::waitKey();
-	
-	// convert the image to grayscale
-	cv::Mat imageGray;
-	cv::cvtColor(imageIn, imageGray, cv::COLOR_BGR2GRAY);
-	
-	// display the grayscale image
-	cv::imshow("imageGray", imageGray);
-	cv::waitKey();
-	
-	// split the input image into individual channels
-	cv::Mat channels[3];
-	cv::split(imageIn, channels);
-	
-	// display the image channels
-	cv::imshow("channels[0] (blue)", channels[0]);
-	cv::imshow("channels[1] (green)", channels[1]);
-	cv::imshow("channels[2] (red)", channels[2]);
-	cv::waitKey();
-	
-    // resize the input image to half of its original size
-    cv::Mat imageResized;
-    cv::resize(imageIn, imageResized, cv::Size(imageIn.cols / 2, imageIn.rows / 2));
-    cv::imshow("imageResized", imageResized);
-    
-	// save the output image
-	cv::imwrite("OUTPUT.png", imageResized);
-	cv::waitKey();
-	
-	// iterate over the resized image printing the pixel values (cv::Mat is row-major, so access is row,col)
-	for(int i = 0; i < imageResized.rows; i++)
-	{
-	    for(int j = 0; j < imageResized.cols; j++)
-	    {
-	        int b = imageResized.at<cv::Vec3b>(i, j)[0];
-	        int g = imageResized.at<cv::Vec3b>(i, j)[1];
-	        int r = imageResized.at<cv::Vec3b>(i, j)[2];
-	        std::cout << "Pixel(" << i << ", " << j << ") = " << b << " " << g << " " << r << std::endl;
-	    }
-	}
+	cv::setMouseCallback("imageIn", clickCallback, &imageIn);
 	cv::waitKey();
 }
 
