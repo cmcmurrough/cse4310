@@ -71,7 +71,8 @@ int main(int argc, char **argv)
 	cv::Mat imageEdges;
 	const double cannyThreshold1 = 100;
 	const double cannyThreshold2 = 200;
-	cv::Canny(imageGray, imageEdges, cannyThreshold1, cannyThreshold2);
+	const int cannyAperture = 3;
+	cv::Canny(imageGray, imageEdges, cannyThreshold1, cannyThreshold2, cannyAperture);
 
     // find the image lines
     std::vector<cv::Vec4i> lines;
