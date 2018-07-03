@@ -98,18 +98,9 @@ int main(int argc, char **argv)
     cv::Mat imageGray;
     cv::cvtColor(imageIn, imageGray, cv::COLOR_BGR2GRAY);
 
-    // find the image edges
-    cv::Mat imageEdges;
-    const double cannyThreshold1 = 100;
-    const double cannyThreshold2 = 200;
-    const int cannyAperture = 3;
-    cv::Canny(imageGray, imageEdges, cannyThreshold1, cannyThreshold2, cannyAperture);
-
-
     // locate the image contours
     std::vector<std::vector<cv::Point> > contours;
-    cv::findContours(imageEdges, contours, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
-
+    cv::findContours(imageGray, contours, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
 
     // merge all contours into a single vector
     std::vector<cv::Point> points;
@@ -119,7 +110,7 @@ int main(int argc, char **argv)
     }
 
     // draw the contours
-    cv::Mat imageContours = cv::Mat::zeros(imageEdges.size(), CV_8UC3);
+    cv::Mat imageContours = cv::Mat::zeros(imageGray.size(), CV_8UC3);
     cv::RNG rand(12345);
     for(int i = 0; i < contours.size(); i++)
     {
@@ -129,11 +120,15 @@ int main(int argc, char **argv)
 
     // begin RANSAC iterations
     const int maxIterations = 5000;
-    const int minInliers = 50;
+    const int minInliers = 250;
     const double inlierDistance = 10;
-    //cv::RNG rand(12345);
+    cv::Mat imageResult = cv::Mat::zeros(imageContours.size(), CV_8UC3);
     for(int i = 0; i < maxIterations; i++)
     {
+        // create the inlier list
+        std::vector<int> inlierIndices;
+        std::vector<cv::Point> inlierPoints;
+
         // select 2 unique random points from the image
         int sampleIndex1 = rand.uniform(0, points.size());
         int sampleIndex2 = rand.uniform(0, points.size());
@@ -148,19 +143,23 @@ int main(int argc, char **argv)
         cv::Vec4i line(p1.x, p1.y, p2.x, p2.y);
 
         // compute the distance of each point to the line
-        int numInliers = 0;
         for(int j = 0; j < points.size(); j++)
         {
             if(pointToLineDistance(points.at(j), line) < inlierDistance)
             {
-                numInliers++;
+                inlierIndices.push_back(j);
+                inlierPoints.push_back(points.at(j));
             }
         }
 
         // check for a successful model
-        if(numInliers >= minInliers)
+        if(inlierIndices.size() >= minInliers)
         {
+            // here is where you would perform an optional refinement step using least-squares
+
+            // draw the model
             std::cout << " FOUND A GOOD MODEL: " << p1 << " " << p2 << std::endl;
+            cv::line(imageResult, p1, p2, cv::Scalar(0, 0, 255));
             break;
         }
     }
@@ -168,10 +167,7 @@ int main(int argc, char **argv)
     // display the images
     cv::imshow("imageIn", imageIn);
     cv::imshow("imageGray", imageGray);
-    //cv::imshow("imageGray", imageLines);
-    cv::imshow("imageEdges", imageEdges);
     cv::imshow("imageContours", imageContours);
-    //cv::imshow("imageRectangles", imageRectangles);
-    //cv::imshow("imageEllipse", imageEllipse);
+    cv::imshow("imageResult", imageResult);
     cv::waitKey();
 }
