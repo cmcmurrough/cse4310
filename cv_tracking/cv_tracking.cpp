@@ -76,7 +76,7 @@ int main(int argc, char **argv)
     cv::namedWindow(DISPLAY_WINDOW_NAME, CV_WINDOW_AUTOSIZE);
 
     // create the tracker object
-    std::string trackerTypes[6] = {"BOOSTING", "MIL", "KCF", "TLD","MEDIANFLOW", "GOTURN"};
+    std::string trackerTypes[7] = {"BOOSTING", "MIL", "KCF", "TLD","MEDIANFLOW", "GOTURN", "MOSSE"};
     std::string trackerType = trackerTypes[trackerSelection];
     cv::Ptr<cv::Tracker> tracker;
     #if (CV_MINOR_VERSION < 3)
@@ -97,6 +97,8 @@ int main(int argc, char **argv)
             tracker = cv::TrackerMedianFlow::create();
         if (trackerType == "GOTURN")
             tracker = cv::TrackerGOTURN::create();
+        if (trackerType == "MOSSE")
+            tracker = cv::TrackerMOSSE::create();
     }
     #endif
     cv::Rect2d roi;
