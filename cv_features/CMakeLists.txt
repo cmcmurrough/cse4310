@@ -5,5 +5,7 @@ cmake_minimum_required(VERSION 2.8)
 find_package(OpenCV REQUIRED)
 
 # create create individual projects
+add_executable(cv_SIFT cv_SIFT.cpp)
+target_link_libraries(cv_SIFT ${OpenCV_LIBS})
 add_executable(cv_SURF cv_SURF.cpp)
 target_link_libraries(cv_SURF ${OpenCV_LIBS})
