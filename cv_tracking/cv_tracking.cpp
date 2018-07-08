@@ -97,8 +97,8 @@ int main(int argc, char **argv)
             tracker = cv::TrackerMedianFlow::create();
         if (trackerType == "GOTURN")
             tracker = cv::TrackerGOTURN::create();
-        if (trackerType == "MOSSE")
-            tracker = cv::TrackerMOSSE::create();
+        //if (trackerType == "MOSSE")
+            //tracker = cv::TrackerMOSSE::create();
     }
     #endif
     cv::Rect2d roi;

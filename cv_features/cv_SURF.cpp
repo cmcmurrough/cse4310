@@ -25,9 +25,7 @@
 #include <iostream>
 #include <string>
 #include "opencv2/opencv.hpp"
-
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/xfeatures2d.hpp"
 #include <iostream>
 #include <stdio.h>
 
@@ -62,20 +60,20 @@ int main(int argc, char **argv)
             return 0;
         }
     }
-	
+
     // convert the image to grayscale
     cv::Mat imageGray;
     cv::cvtColor(imageIn, imageGray, cv::COLOR_BGR2GRAY);
 
 	// detect SURF keypoints
 	const int minHessian = 400;
-	cv::Ptr<cv::SURF> detector = cv::SURF::create(minHessian);
+	cv::Ptr<cv::xfeatures2d::SURF> detector = cv::xfeatures2d::SURF::create(minHessian);
 	std::vector<cv::KeyPoint> keypoints;
 	detector->detect(imageGray, keypoints);
 
 	// draw the keypoints
 	cv::Mat imageKeypoints;
-	cv::drawKeypoints(imageGray, keypoints, imageKeypoints, Scalar::all(-1), cv::DrawMatchesFlags::DEFAULT);
+	cv::drawKeypoints(imageGray, keypoints, imageKeypoints, cv::Scalar::all(-1), cv::DrawMatchesFlags::DEFAULT);
 
     // display the images
     cv::imshow("imageIn", imageIn);

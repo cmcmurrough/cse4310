@@ -126,7 +126,7 @@ int main(int argc, char **argv)
             int delayMs = (1.0 / captureFPS) * 1000;
 
             // check for program termination
-            if(((char) cv::waitKey(delayMs)) == 'q')
+            if(((char) cv::waitKey(1)) == 'q')
             {
                 doCapture = false;
             }
