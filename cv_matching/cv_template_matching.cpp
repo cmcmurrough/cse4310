@@ -45,7 +45,7 @@
 int main(int argc, char **argv)
 {
     cv::Mat imageScene;
-	cv::Mat imageTemplate
+    cv::Mat imageTemplate;
 
     // validate and parse the command line arguments
     if(argc != NUM_COMNMAND_LINE_ARGUMENTS + 1)
@@ -56,12 +56,17 @@ int main(int argc, char **argv)
     else
     {
         imageScene = cv::imread(argv[1], CV_LOAD_IMAGE_COLOR);
-		imageTemplate = cv::imread(argv[2], CV_LOAD_IMAGE_COLOR);
+        imageTemplate = cv::imread(argv[2], CV_LOAD_IMAGE_COLOR);
 
         // check for file error
-        if(!imageIn.data)
+        if(!imageScene.data)
         {
             std::cout << "Error while opening file " << argv[1] << std::endl;
+            return 0;
+        }
+        if(!imageTemplate.data)
+        {
+            std::cout << "Error while opening file " << argv[2] << std::endl;
             return 0;
         }
     }
@@ -69,14 +74,14 @@ int main(int argc, char **argv)
     // convert the images to grayscale
     cv::Mat imageSceneGray;
     cv::cvtColor(imageScene, imageSceneGray, cv::COLOR_BGR2GRAY);
-	cv::Mat imageTemplateGray;
-	cv::cvtColor(imageTemplate, imageTemplateGray, cv::COLOR_BGR2GRAY);
+    cv::Mat imageTemplateGray;
+    cv::cvtColor(imageTemplate, imageTemplateGray, cv::COLOR_BGR2GRAY);
 
-	// perform the matching step and normalize the result
-    cv::Mat result;
+    // perform the matching step and normalize the searchResult
+    cv::Mat searchResult;
     int match_method = CV_TM_CCORR_NORMED;
-    cv::matchTemplate(sceneIimageSceneGraymage, imageTemplateGray, result, match_method);
-    cv::normalize(result, result, 0, 1, cv::NORM_MINMAX, -1, cv::Mat());
+    cv::matchTemplate(imageSceneGray, imageTemplateGray, searchResult, match_method);
+    cv::normalize(searchResult, searchResult, 0, 1, cv::NORM_MINMAX, -1, cv::Mat());
 
     // find the location of the best fit
     double minVal;
@@ -84,7 +89,7 @@ int main(int argc, char **argv)
     cv::Point minLocation;
     cv::Point maxLocation;
     cv::Point matchLocation;
-    cv::minMaxLoc(result, &minVal, &maxVal, &minLocation, &maxLocation, cv::Mat());
+    cv::minMaxLoc(searchResult, &minVal, &maxVal, &minLocation, &maxLocation, cv::Mat());
     if(match_method  == CV_TM_SQDIFF || match_method == CV_TM_SQDIFF_NORMED)
     {
         matchLocation = minLocation;
@@ -93,16 +98,14 @@ int main(int argc, char **argv)
     {
         matchLocation = maxLocation;
     }
-	
-	// annotate the result image
-    cv::Mat resultAnnotated;
-    cv::cvtColor(imageScene, resultAnnotated, CV_GRAY2BGR);
-    cv::rectangle(resultAnnotated, location, cv::Point(location.x + imageTemplate.cols , location.y + imageTemplate.rows), CV_RGB(255,0,0), 3);
+
+    // annotate the scene image
+    cv::rectangle(imageScene, matchLocation, cv::Point(matchLocation.x + imageTemplate.cols , matchLocation.y + imageTemplate.rows), CV_RGB(255,0,0), 3);
 
     // display the images
     cv::imshow("imageScene", imageScene);
-	cv::imshow("imageTemplate", imageTemplate);
-	cv::imshow("resultAnnotated", resultAnnotated);
+    cv::imshow("imageTemplate", imageTemplate);
+    cv::imshow("searchResult", searchResult);
     cv::waitKey();
 
     return 0;
