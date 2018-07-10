@@ -25,12 +25,6 @@
 #include <stdio.h>
 #include <iostream>
 #include "opencv2/opencv.hpp"
-//#include "opencv2/core.hpp"
-//#include "opencv2/imgproc.hpp"
-//#include "opencv2/features2d.hpp"
-//#include "opencv2/highgui.hpp"
-//#include "opencv2/calib3d.hpp"
-//#include "opencv2/xfeatures2d.hpp"
 
 // configuration parameters
 #define NUM_COMNMAND_LINE_ARGUMENTS 2
@@ -110,6 +104,3 @@ int main(int argc, char **argv)
 
     return 0;
 }
-
-
-
