@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 
     // detect SURF keypoints and descriptors in both images
     const int minHessian = 400;
-    cv::Ptr<cv::xfeatures2d::SIFT> detector = cv::xfeatures2d::SIFT::create(minHessian);
+    cv::Ptr<cv::xfeatures2d::SURF> detector = cv::xfeatures2d::SURF::create(minHessian);
     std::vector<cv::KeyPoint> keypointsScene;
     std::vector<cv::KeyPoint> keypointsObject;
     cv::Mat descriptorsScene;
@@ -111,7 +111,7 @@ int main(int argc, char **argv)
     std::vector<cv::DMatch> goodMatches;
     for( int i = 0; i < descriptorsObject.rows; i++ )
     {
-        if(matches[i].distance <= 2 * minDistance)
+        if(matches[i].distance <= 3 * minDistance)
         {
             goodMatches.push_back( matches[i]);
         }
@@ -120,6 +120,33 @@ int main(int argc, char **argv)
     // draw the good matches
     cv::Mat imageMatches;
     cv::drawMatches(imageObject, keypointsObject, imageScene, keypointsScene, goodMatches, imageMatches, cv::Scalar::all(-1), cv::Scalar::all(-1), std::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
+
+    // localize the object using homography
+    std::vector<cv::Point2f> goodObjectKeypoints;
+    std::vector<cv::Point2f> goodSceneKeypoints;
+
+    for(int i = 0; i < goodMatches.size(); i++)
+    {
+        // get the individual components from each "good" keypoint match
+        goodObjectKeypoints.push_back(keypointsObject[goodMatches[i].queryIdx].pt);
+        goodSceneKeypoints.push_back(keypointsScene[goodMatches[i].trainIdx].pt);
+    }
+    cv::Mat H = findHomography(goodObjectKeypoints, goodSceneKeypoints, cv::RANSAC);
+
+    // transform the object corners to the scene coordinate system
+    std::vector<cv::Point2f> objectCorners(4);
+    objectCorners[0] = cv::Point(0,0);
+    objectCorners[1] = cv::Point(imageObject.cols, 0);
+    objectCorners[2] = cv::Point(imageObject.cols, imageObject.rows);
+    objectCorners[3] = cv::Point(0, imageObject.rows);
+    std::vector<cv::Point2f> sceneCorners(4);
+    cv::perspectiveTransform(objectCorners, sceneCorners, H);
+
+    // draw lines between each corner
+    cv::line(imageMatches, sceneCorners[0] + cv::Point2f(imageObject.cols, 0), sceneCorners[1] + cv::Point2f(imageObject.cols, 0), cv::Scalar(0, 255, 0), 4);
+    cv::line(imageMatches, sceneCorners[1] + cv::Point2f(imageObject.cols, 0), sceneCorners[2] + cv::Point2f(imageObject.cols, 0), cv::Scalar(0, 255, 0), 4);
+    cv::line(imageMatches, sceneCorners[2] + cv::Point2f(imageObject.cols, 0), sceneCorners[3] + cv::Point2f(imageObject.cols, 0), cv::Scalar(0, 255, 0), 4);
+    cv::line(imageMatches, sceneCorners[3] + cv::Point2f(imageObject.cols, 0), sceneCorners[0] + cv::Point2f(imageObject.cols, 0), cv::Scalar(0, 255, 0), 4);
 
     // display the images
     cv::imshow("imageScene", imageScene);

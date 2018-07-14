@@ -13,4 +13,5 @@ add_executable(cv_blob cv_blob.cpp)
 target_link_libraries(cv_blob ${OpenCV_LIBS})
 add_executable(cv_FLANN_matching cv_FLANN_matching.cpp)
 target_link_libraries(cv_FLANN_matching ${OpenCV_LIBS})
-
+add_executable(cv_homography cv_homography.cpp)
+target_link_libraries(cv_homography ${OpenCV_LIBS})
