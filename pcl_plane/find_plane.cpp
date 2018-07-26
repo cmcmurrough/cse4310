@@ -163,7 +163,6 @@ void segmentPlane(const pcl::PointCloud<pcl::PointXYZRGBA>::ConstPtr &cloudIn, p
 {
     // store the model coefficients
     pcl::ModelCoefficients::Ptr coefficients(new pcl::ModelCoefficients);
-    SegmentedPlane plane;
 
     // Create the segmentation object for the planar model and set the parameters
     pcl::SACSegmentation<pcl::PointXYZRGBA> seg;
@@ -176,28 +175,6 @@ void segmentPlane(const pcl::PointCloud<pcl::PointXYZRGBA>::ConstPtr &cloudIn, p
     // Segment the largest planar component from the remaining cloud
     seg.setInputCloud(cloudIn);
     seg.segment(*inliers, *coefficients);
-
-    // if no planes where found, return an empty struct;
-    if(coefficients->values.empty())
-    {
-        // return an empty plane
-        plane.numPoints = 0;
-        plane.A = 0;
-        plane.B = 0;
-        plane.C = 0;
-        plane.D = 0;
-        return plane;
-    }
-    else
-    {
-        // return the segmented plane
-        plane.numPoints = (int) inliers->indices.size();
-        plane.A = coefficients->values[0];
-        plane.B = coefficients->values[1];
-        plane.C = coefficients->values[2];
-        plane.D = coefficients->values[3];
-        return plane;
-    }
 }
 
 /***********************************************************************************************************************
