@@ -45,7 +45,6 @@ using namespace std;
 // function prototypes
 void pointPickingCallback(const pcl::visualization::PointPickingEvent& event, void* cookie);
 void keyboardCallback(const pcl::visualization::KeyboardEvent &event, void* viewer_void);
-//void segmentPlane(const pcl::PointCloud<pcl::PointXYZRGBA>::ConstPtr &cloudIn, pcl::PointIndices::Ptr &inliers, double distanceThreshold, int maxIterations);
 
 /***********************************************************************************************************************
 * @brief callback function for handling a point picking event
@@ -150,38 +149,6 @@ bool openCloud(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloudOut, const char* fi
     }
 }
 
-/*******************************************************************************************************************//**
- * @brief Locate a plane in the cloud
- *
- * Perform planar segmentation using RANSAC, returning the plane parameters and point indices
- *
- * @param[in] cloudIn pointer to input point cloud
- * @param[out] inliers list containing the point indices of inliers
- * @param[in] distanceThreshold maximum distance of a point to the planar model to be considered an inlier
- * @param[in] maxIterations maximum number of iterations to attempt before returning
- * @return the number of inliers
- * @author Christopher D. McMurrough
- **********************************************************************************************************************/
- /*
-void segmentPlane(const pcl::PointCloud<pcl::PointXYZRGBA>::ConstPtr &cloudIn, pcl::PointIndices::Ptr &inliers, double distanceThreshold, int maxIterations)
-{
-    // store the model coefficients
-    pcl::ModelCoefficients::Ptr coefficients(new pcl::ModelCoefficients);
-
-    // Create the segmentation object for the planar model and set the parameters
-    pcl::SACSegmentation<pcl::PointXYZRGBA> seg;
-    seg.setOptimizeCoefficients(true);
-    seg.setModelType(pcl::SACMODEL_PLANE);
-    seg.setMethodType(pcl::SAC_RANSAC);
-    seg.setMaxIterations(maxIterations);
-    seg.setDistanceThreshold(distanceThreshold);
-
-    // Segment the largest planar component from the remaining cloud
-    seg.setInputCloud(cloudIn);
-    seg.segment(*inliers, *coefficients);
-}
-*/
-
 /***********************************************************************************************************************
 * @brief program entry point
 * @param[in] argc number of command line arguments
@@ -223,8 +190,6 @@ int main(int argc, char** argv)
     voxFilter.filter(*cloudFiltered);
     std::cout << "Points before downsampling: " << cloudIn->points.size() << std::endl;
     std::cout << "Points before downsampling: " << cloudFiltered->points.size() << std::endl;
-
-
 
     // create the vector of indices lists (each element contains a list of imultiple indices)
     const float clusterDistance = 0.02;
