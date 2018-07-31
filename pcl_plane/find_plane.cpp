@@ -210,13 +210,12 @@ int main(int argc, char** argv)
     openCloud(cloud, fileName);
 
     // segment a plane
-    const float distanceThreshold = 0.0254 * 3;
+    const float distanceThreshold = 0.0254;
     const int maxIterations = 5000;
     pcl::PointIndices::Ptr inliers(new pcl::PointIndices);
     segmentPlane(cloud, inliers, distanceThreshold, maxIterations);
     std::cout << "Segmentation result: " << inliers->indices.size() << " points" << std::endl;
-
-    /// TODO: color the plane points for display
+    
     // color the plane inliers green
     for(int i = 0; i < inliers->indices.size(); i++)
     {
@@ -233,16 +232,6 @@ int main(int argc, char** argv)
     // render the scene
     CV.addCloud(cloud);
     CV.addCoordinateFrame(cloud->sensor_origin_, cloud->sensor_orientation_);
-
-    /// TODO: add a plane to the display
-    Eigen::Vector4f params;
-    params[0] = 0.0;
-    params[1] = -1.0;
-    params[2] = 0.0;
-    params[3] = 1.25;
-    CV.addPlane(params);
-
-    //void addPlane(const Eigen::Vector4f &plane, double r=255.0, double g=255.0, double b=255.0, double opacity=1.0, const string &id="plane", int viewPort=0);
 
     // register mouse and keyboard event callbacks
     CV.registerPointPickingCallback(pointPickingCallback, cloud);
