@@ -120,7 +120,7 @@ int main(int argc, char **argv)
 
     // begin RANSAC iterations
     const int maxIterations = 5000;
-    const int minInliers = 250;
+    const int minInliers = 600;
     const double inlierDistance = 10;
     cv::Mat imageResult = cv::Mat::zeros(imageContours.size(), CV_8UC3);
     for(int i = 0; i < maxIterations; i++)

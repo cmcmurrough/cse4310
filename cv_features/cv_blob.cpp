@@ -68,15 +68,15 @@ int main(int argc, char **argv)
     // define the blob detection parameters
     cv::SimpleBlobDetector::Params params;
     params.minThreshold = 10;
-    params.maxThreshold = 200;
+    params.maxThreshold = 250;
     params.filterByArea = true;
-    params.minArea = 1500;
-    params.filterByCircularity = false;
+    params.minArea = 200;
+    params.filterByCircularity = true;
     params.minCircularity = 0.1;
     params.filterByConvexity = false;
-    params.minConvexity = 0.87;
-    params.filterByInertia = false;
-    params.minInertiaRatio = 0.01;
+    params.minConvexity = 0.9;
+    params.filterByInertia = true;
+    params.minInertiaRatio = 0.1;
 
     // set up the blob detector with default parameters
     cv::Ptr<cv::SimpleBlobDetector> detector = cv::SimpleBlobDetector::create(params);
