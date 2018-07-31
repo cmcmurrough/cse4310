@@ -31,13 +31,7 @@
 #include <pcl/io/ply_io.h>
 #include <pcl/common/time.h>
 
-//#include <pcl/sample_consensus/model_types.h>
-//#include <pcl/sample_consensus/method_types.h>
-//#include <pcl/sample_consensus/sac_model_plane.h>
-//#include <pcl/segmentation/sac_segmentation.h>
-
 #include <pcl/filters/voxel_grid.h>
-
 
 #include <pcl/kdtree/io.h>
 #include <pcl/kdtree/kdtree_flann.h>
