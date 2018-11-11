@@ -29,12 +29,12 @@
 #define CAMERA_CONVERT_RGB false
 
 // color constants
-CvScalar COLOR_WHITE = CV_RGB(255, 255, 255);
-CvScalar COLOR_RED = CV_RGB(255, 0, 0);
-CvScalar COLOR_GREEN = CV_RGB(0, 255, 0);
-CvScalar COLOR_BLUE = CV_RGB(0, 0, 255);
-CvScalar COLOR_YELLOW = CV_RGB(255, 255, 0);
-CvScalar COLOR_MAGENTA = CV_RGB(255, 0, 255);
+cv::Scalar COLOR_WHITE = CV_RGB(255, 255, 255);
+cv::Scalar COLOR_RED = CV_RGB(255, 0, 0);
+cv::Scalar COLOR_GREEN = CV_RGB(0, 255, 0);
+cv::Scalar COLOR_BLUE = CV_RGB(0, 0, 255);
+cv::Scalar COLOR_YELLOW = CV_RGB(255, 255, 0);
+cv::Scalar COLOR_MAGENTA = CV_RGB(255, 0, 255);
 
 /*******************************************************************************************************************//**
  * @brief Program entry point
@@ -85,6 +85,7 @@ int main(int argc, char** argv)
     }
 
     // set video capture parameters
+    /*
     occulography.set(CV_CAP_PROP_FRAME_WIDTH, CAMERA_FRAME_WIDTH);
     occulography.set(CV_CAP_PROP_FRAME_HEIGHT, CAMERA_FRAME_HEIGHT);
     occulography.set(CV_CAP_PROP_FORMAT, CAMERA_FORMAT);
@@ -96,14 +97,15 @@ int main(int argc, char** argv)
     occulography.set(CV_CAP_PROP_GAIN, CAMERA_GAIN);
     occulography.set(CV_CAP_PROP_EXPOSURE, CAMERA_EXPOSURE);
     occulography.set(CV_CAP_PROP_CONVERT_RGB, CAMERA_CONVERT_RGB);
+    */
 
     // intialize the display window if necessary
     if(displayMode)
     {
-        cvNamedWindow("eyeImage", CV_WINDOW_NORMAL);
-        cvSetWindowProperty("eyeImage", CV_WND_PROP_FULLSCREEN, CV_WINDOW_NORMAL);
-        cvSetWindowProperty("eyeImage", CV_WND_PROP_AUTOSIZE, CV_WINDOW_NORMAL);
-        cvSetWindowProperty("eyeImage", CV_WND_PROP_ASPECTRATIO, CV_WINDOW_KEEPRATIO);
+        cv::namedWindow("eyeImage", cv::WINDOW_NORMAL);
+        cv::setWindowProperty("eyeImage", cv::WND_PROP_FULLSCREEN, cv::WINDOW_NORMAL);
+        cv::setWindowProperty("eyeImage", cv::WND_PROP_AUTOSIZE, cv::WINDOW_NORMAL);
+        cv::setWindowProperty("eyeImage", cv::WND_PROP_ASPECT_RATIO, cv::WINDOW_KEEPRATIO);
     }
 
     // create the pupil tracking object
@@ -182,7 +184,7 @@ int main(int argc, char** argv)
         else
         {
             std::printf("WARNING: Unable to capture image from source!\n");
-            occulography.set(CV_CAP_PROP_POS_FRAMES, 0);
+            occulography.set(cv::CAP_PROP_POS_FRAMES, 0);
             continue;
         }
 

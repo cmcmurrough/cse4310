@@ -1,6 +1,9 @@
 project (cv_capture_example)
 cmake_minimum_required(VERSION 2.8)
 
+# explicitly set c++11 
+set(CMAKE_CXX_STANDARD 11)
+
 # configure OpenCV
 IF(WIN32)
     # set the opencv directories manually

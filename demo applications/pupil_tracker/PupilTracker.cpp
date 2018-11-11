@@ -145,7 +145,7 @@ bool PupilTracker::findPupil(const cv::Mat& imageIn)
 
     // compute the connected components out of the pupil edge candidates
     std::vector<std::vector<cv::Point> > contours;
-    cv::findContours(edgesPruned, contours, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
+    cv::findContours(edgesPruned, contours, cv::RETR_CCOMP, cv::CHAIN_APPROX_SIMPLE);
 
     // determine merge candidacy for contours with sufficient size
     std::vector<bool> contourMergeable(contours.size());
@@ -200,7 +200,7 @@ bool PupilTracker::findPupil(const cv::Mat& imageIn)
         cv::imshow("filteredContours", filteredContours);
     }
 
-    // perform the ellipse fitting step and return 
+    // perform the ellipse fitting step and return
     if(success)
     {
         m_ellipseRectangle = cv::fitEllipse(contoursMerged);
