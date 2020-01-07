@@ -12,7 +12,7 @@
 #include <iostream>
 
 /*******************************************************************************************************************//**
-* @brief Constructor to create a PupilTracker
+* @brief Default constructor to create a PupilTracker
 * @author Christopher D. McMurrough
 ***********************************************************************************************************************/
 PupilTracker::PupilTracker()
@@ -20,13 +20,39 @@ PupilTracker::PupilTracker()
     // tracker settings
     m_blur = 5;
     m_canny_thresh = 159;
-    m_canny_ratio = 2;
+    m_canny_ratio = 2.0;
     m_canny_aperture = 5;
     m_bin_thresh = 0;
     m_pupilIntensityOffset = 11;
     m_glintIntensityOffset = 5;
     m_min_contour_size = 80;
-    m_confidence = 0;
+
+    // set debug display
+    setDisplay(false);
+}
+
+/*******************************************************************************************************************//**
+* @brief Constructor to create a PupilTracker with custom execution parameters
+* @param[in] blur amount of blur to apply to input image
+* @param[in] cannyThreshold amount of blur to apply to input image
+* @param[in] cannyRatio edge detection canny ratio parameter used to calculate max threshold
+* @param[in] cannyAperture edge detection canny aperature parameter
+* @param[in] pupilIntensityOffset amount of blur to apply to input image
+* @param[in] glintIntensityOffset amount of blur to apply to input image
+* @param[in] minContourSize amount of blur to apply to input image
+* @author Christopher D. McMurrough
+***********************************************************************************************************************/
+PupilTracker::PupilTracker(int blur, int cannyThreshold, float cannyRatio, int cannyAperture, int pupilIntensityOffset, int glintIntensityOffset, int minContourSize)
+{
+    // tracker settings
+    m_blur = blur;
+    m_canny_thresh = cannyThreshold;
+    m_canny_ratio = cannyRatio;
+    m_canny_aperture = cannyAperture;
+    m_bin_thresh = 0;
+    m_pupilIntensityOffset = pupilIntensityOffset;
+    m_glintIntensityOffset = glintIntensityOffset;
+    m_min_contour_size = minContourSize;
 
     // set debug display
     setDisplay(false);
@@ -203,7 +229,17 @@ bool PupilTracker::findPupil(const cv::Mat& imageIn)
     // perform the ellipse fitting step and return
     if(success)
     {
-        m_ellipseRectangle = cv::fitEllipse(contoursMerged);
+        try
+        {
+            m_ellipseRectangle = cv::fitEllipse(contoursMerged);
+        }
+        catch(const std::exception& e)
+        {
+            // return false on exception
+            std::cout << "WARNING: exception thrown while fitting ellipse: " << e.what() << std::endl;
+            return false;
+        }
+        
         return true;
     }
     else
