@@ -116,7 +116,8 @@ int main(int argc, char** argv)
     const int pupilIntensityOffset = 30;
     const int glintIntensityOffset = 5;
     const int minContourSize = 200;
-    PupilTracker tracker(blur, cannyThreshold, cannyRatio, cannyAperture, pupilIntensityOffset, glintIntensityOffset, minContourSize);
+    //PupilTracker tracker(blur, cannyThreshold, cannyRatio, cannyAperture, pupilIntensityOffset, glintIntensityOffset, minContourSize);
+    PupilTracker tracker; // load default parameters (use above for custom parameters)
     tracker.setDisplay(displayMode);
 
     // store the frame data
