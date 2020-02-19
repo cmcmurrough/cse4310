@@ -52,8 +52,8 @@ int main(int argc, char **argv)
     }
     else
     {
-        imageScene = cv::imread(argv[1], CV_LOAD_IMAGE_COLOR);
-        imageObject = cv::imread(argv[2], CV_LOAD_IMAGE_COLOR);
+        imageScene = cv::imread(argv[1], cv::IMREAD_COLOR);
+        imageObject = cv::imread(argv[2], cv::IMREAD_COLOR);
 
         // check for file error
         if(!imageScene.data)
