@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     }
     else
     {
-        imageIn = cv::imread(argv[1], CV_LOAD_IMAGE_COLOR);
+        imageIn = cv::imread(argv[1], cv::IMREAD_COLOR);
 
         // check for file error
         if(!imageIn.data)
