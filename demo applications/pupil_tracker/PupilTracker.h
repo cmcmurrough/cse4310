@@ -44,6 +44,7 @@ public:
 
     // constructors
     PupilTracker();
+    PupilTracker(int blur, int cannyThreshold, float cannyRatio, int cannyAperture, int pupilIntensityOffset, int glintIntensityOffset, int minContourSize);
 
     // accessors
     cv::Point2f getEllipseCentroid();

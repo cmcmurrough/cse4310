@@ -54,8 +54,8 @@ int main(int argc, char** argv)
     bool flipDisplay = false;
     if(argc != NUM_COMNMAND_LINE_ARGUMENTS + 1)
     {
-        std::printf("USAGE: <video_source> <display_mode>\n");
-        std::printf("Running with default parameters... \n");
+        std::cout << "USAGE: <video_source> <display_mode>" << std::endl;
+        std::cout << "Running with default parameters..." << std::endl;
     }
     else
     {
@@ -80,7 +80,7 @@ int main(int argc, char** argv)
     // check to see if the video source was opened successfully
     if(!occulography.isOpened())
     {
-        std::printf("Unable to initialize video source %s! \n", videoSource.c_str());
+        std::cerr << "ERROR: Unable to initialize video source: " << videoSource << std::endl;
         return 0;
     }
 
@@ -109,7 +109,15 @@ int main(int argc, char** argv)
     }
 
     // create the pupil tracking object
-    PupilTracker tracker;
+    const int blur = 5;
+    const int cannyThreshold = 1200;
+    const float cannyRatio = 1.25;
+    const int cannyAperture = 5;
+    const int pupilIntensityOffset = 30;
+    const int glintIntensityOffset = 5;
+    const int minContourSize = 200;
+    //PupilTracker tracker(blur, cannyThreshold, cannyRatio, cannyAperture, pupilIntensityOffset, glintIntensityOffset, minContourSize);
+    PupilTracker tracker; // load default parameters (use above for custom parameters)
     tracker.setDisplay(displayMode);
 
     // store the frame data
@@ -138,7 +146,7 @@ int main(int argc, char** argv)
             // warn on tracking failure
             if(!trackingSuccess)
             {
-                std::printf("Unable to locate pupil! \n");
+                std::cout << "Unable to locate pupil!" << std::endl;
             }
 
             // update the display
@@ -183,7 +191,7 @@ int main(int argc, char** argv)
         }
         else
         {
-            std::printf("WARNING: Unable to capture image from source!\n");
+            std::cout << "WARNING: Unable to capture image from source!" << std::endl;
             occulography.set(cv::CAP_PROP_POS_FRAMES, 0);
             continue;
         }
@@ -191,7 +199,9 @@ int main(int argc, char** argv)
         // stop the timer and print the elapsed time
         frameEndTicks = clock();
         totalTime = ((float)(frameEndTicks - frameStartTicks)) / CLOCKS_PER_SEC;
-        std::printf("Processing time (pupil, total) (result x,y): %.4f %.4f - %.2f %.2f\n", processTime, totalTime, tracker.getEllipseCentroid().x, tracker.getEllipseCentroid().y);
+        std::cout << std::fixed;
+        std::cout << std::setprecision(4);
+        std::cout << "Processing time (pupil, total): " << processTime << " " << totalTime << " - coordinates: " << tracker.getEllipseCentroid() << std::endl;
     }
 
     // release the video source before exiting
