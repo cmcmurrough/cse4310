@@ -101,25 +101,25 @@ int main(int argc, char **argv)
     }
 
     // set optional video capture parameters (WARNING: not all video sources support these)
-    //capture.set(CV_CAP_PROP_FRAME_WIDTH, CAMERA_FRAME_WIDTH);
-    //capture.set(CV_CAP_PROP_FRAME_HEIGHT, CAMERA_FRAME_HEIGHT);
-    //capture.set(CV_CAP_PROP_FORMAT, CAMERA_FORMAT);
-    //capture.set(CV_CAP_PROP_FPS, CAMERA_FPS);
-    //capture.set(CV_CAP_PROP_BRIGHTNESS, CAMERA_BRIGHTNESS);
-    //capture.set(CV_CAP_PROP_CONTRAST, CAMERA_CONTRAST);
-    //capture.set(CV_CAP_PROP_SATURATION, CAMERA_SATURATION);
-    //capture.set(CV_CAP_PROP_HUE, CAMERA_HUE);
-    //capture.set(CV_CAP_PROP_GAIN, CAMERA_GAIN);
-    //capture.set(CV_CAP_PROP_EXPOSURE, CAMERA_EXPOSURE);
-    //capture.set(CV_CAP_PROP_CONVERT_RGB, CAMERA_CONVERT_RGB);
+    //capture.set(cv::CAP_PROP_FRAME_WIDTH, CAMERA_FRAME_WIDTH);
+    //capture.set(cv::CAP_PROP_FRAME_HEIGHT, CAMERA_FRAME_HEIGHT);
+    //capture.set(cv::CAP_PROP_FORMAT, CAMERA_FORMAT);
+    //capture.set(cv::CAP_PROP_FPS, CAMERA_FPS);
+    //capture.set(cv::CAP_PROP_BRIGHTNESS, CAMERA_BRIGHTNESS);
+    //capture.set(cv::CAP_PROP_CONTRAST, CAMERA_CONTRAST);
+    //capture.set(cv::CAP_PROP_SATURATION, CAMERA_SATURATION);
+    //capture.set(cv::CAP_PROP_HUE, CAMERA_HUE);
+    //capture.set(cv::CAP_PROP_GAIN, CAMERA_GAIN);
+    //capture.set(cv::CAP_PROP_EXPOSURE, CAMERA_EXPOSURE);
+    //capture.set(cv::CAP_PROP_CONVERT_RGB, CAMERA_CONVERT_RGB);
 
     // get the video source parameters
-    int captureWidth = static_cast<int>(capture.get(CV_CAP_PROP_FRAME_WIDTH));
-    int captureHeight = static_cast<int>(capture.get(CV_CAP_PROP_FRAME_HEIGHT));
+    int captureWidth = static_cast<int>(capture.get(cv::CAP_PROP_FRAME_WIDTH));
+    int captureHeight = static_cast<int>(capture.get(cv::CAP_PROP_FRAME_HEIGHT));
     std::cout << "Video source opened successfully (width=" << captureWidth << " height=" << captureHeight << ")!" << std::endl;
 
     // create image window
-    cv::namedWindow(DISPLAY_WINDOW_NAME, CV_WINDOW_AUTOSIZE);
+    cv::namedWindow(DISPLAY_WINDOW_NAME, cv::WINDOW_AUTOSIZE);
 
     // process data until program termination
     bool doCapture = true;

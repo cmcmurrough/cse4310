@@ -16,7 +16,7 @@
 //
 
 /*******************************************************************************************************************//**
- * @file cv_load_video.cpp
+ * @file cv::load_video.cpp
  * @brief C++ example for acquiring and processing image frames with OpenCV
  * @author Christopher D. McMurrough
  **********************************************************************************************************************/
@@ -84,13 +84,13 @@ int main(int argc, char **argv)
     }
 
     // get the video source parameters
-    int captureWidth = static_cast<int>(capture.get(CV_CAP_PROP_FRAME_WIDTH));
-    int captureHeight = static_cast<int>(capture.get(CV_CAP_PROP_FRAME_HEIGHT));
-    int captureFPS = static_cast<int>(capture.get(CV_CAP_PROP_FPS));
+    int captureWidth = static_cast<int>(capture.get(cv::CAP_PROP_FRAME_WIDTH));
+    int captureHeight = static_cast<int>(capture.get(cv::CAP_PROP_FRAME_HEIGHT));
+    int captureFPS = static_cast<int>(capture.get(cv::CAP_PROP_FPS));
     std::cout << "Video source opened successfully (width=" << captureWidth << " height=" << captureHeight << " fps=" << captureFPS << ")!" << std::endl;
 
     // create image window
-    cv::namedWindow(DISPLAY_WINDOW_NAME, CV_WINDOW_AUTOSIZE);
+    cv::namedWindow(DISPLAY_WINDOW_NAME, cv::WINDOW_AUTOSIZE);
 
     // process data until program termination
     bool doCapture = true;
