@@ -86,17 +86,17 @@ int main(int argc, char** argv)
 
     // set video capture parameters
     /*
-    occulography.set(CV_CAP_PROP_FRAME_WIDTH, CAMERA_FRAME_WIDTH);
-    occulography.set(CV_CAP_PROP_FRAME_HEIGHT, CAMERA_FRAME_HEIGHT);
-    occulography.set(CV_CAP_PROP_FORMAT, CAMERA_FORMAT);
-    occulography.set(CV_CAP_PROP_FPS, CAMERA_FPS);
-    occulography.set(CV_CAP_PROP_BRIGHTNESS, CAMERA_BRIGHTNESS);
-    occulography.set(CV_CAP_PROP_CONTRAST, CAMERA_CONTRAST);
-    occulography.set(CV_CAP_PROP_SATURATION, CAMERA_SATURATION);
-    occulography.set(CV_CAP_PROP_HUE, CAMERA_HUE);
-    occulography.set(CV_CAP_PROP_GAIN, CAMERA_GAIN);
-    occulography.set(CV_CAP_PROP_EXPOSURE, CAMERA_EXPOSURE);
-    occulography.set(CV_CAP_PROP_CONVERT_RGB, CAMERA_CONVERT_RGB);
+    occulography.set(cv::CAP_PROP_FRAME_WIDTH, CAMERA_FRAME_WIDTH);
+    occulography.set(cv::CAP_PROP_FRAME_HEIGHT, CAMERA_FRAME_HEIGHT);
+    occulography.set(cv::CAP_PROP_FORMAT, CAMERA_FORMAT);
+    occulography.set(cv::CAP_PROP_FPS, CAMERA_FPS);
+    occulography.set(cv::CAP_PROP_BRIGHTNESS, CAMERA_BRIGHTNESS);
+    occulography.set(cv::CAP_PROP_CONTRAST, CAMERA_CONTRAST);
+    occulography.set(cv::CAP_PROP_SATURATION, CAMERA_SATURATION);
+    occulography.set(cv::CAP_PROP_HUE, CAMERA_HUE);
+    occulography.set(cv::CAP_PROP_GAIN, CAMERA_GAIN);
+    occulography.set(cv::CAP_PROP_EXPOSURE, CAMERA_EXPOSURE);
+    occulography.set(cv::CAP_PROP_CONVERT_RGB, CAMERA_CONVERT_RGB);
     */
 
     // intialize the display window if necessary

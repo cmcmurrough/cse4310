@@ -67,9 +67,9 @@ int main(int argc, char **argv)
     }
 
     // get the video source parameters
-    int captureWidth = static_cast<int>(capture.get(CV_CAP_PROP_FRAME_WIDTH));
-    int captureHeight = static_cast<int>(capture.get(CV_CAP_PROP_FRAME_HEIGHT));
-    int captureFPS = static_cast<int>(capture.get(CV_CAP_PROP_FPS));
+    int captureWidth = static_cast<int>(capture.get(cv::CAP_PROP_FRAME_WIDTH));
+    int captureHeight = static_cast<int>(capture.get(cv::CAP_PROP_FRAME_HEIGHT));
+    int captureFPS = static_cast<int>(capture.get(cv::CAP_PROP_FPS));
     std::cout << "Video source opened successfully (width=" << captureWidth << " height=" << captureHeight << " fps=" << captureFPS << ")!" << std::endl;
 
     // create image window
