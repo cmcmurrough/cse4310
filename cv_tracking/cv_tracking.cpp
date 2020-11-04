@@ -25,7 +25,6 @@
 #include <iostream>
 #include <cstdio>
 #include "opencv2/opencv.hpp"
-
 #include <opencv2/tracking.hpp>
 #include <opencv2/core/ocl.hpp>
 
@@ -73,34 +72,30 @@ int main(int argc, char **argv)
     std::cout << "Video source opened successfully (width=" << captureWidth << " height=" << captureHeight << " fps=" << captureFPS << ")!" << std::endl;
 
     // create image window
-    cv::namedWindow(DISPLAY_WINDOW_NAME, CV_WINDOW_AUTOSIZE);
+    cv::namedWindow(DISPLAY_WINDOW_NAME, cv::WINDOW_AUTOSIZE);
 
     // create the tracker object
-    std::string trackerTypes[7] = {"BOOSTING", "MIL", "KCF", "TLD","MEDIANFLOW", "GOTURN", "MOSSE"};
+    std::string trackerTypes[9] = {"BOOSTING", "MIL", "KCF", "TLD","MEDIANFLOW", "GOTURN", "MOSSE", "CSRT", "HOG"};
     std::string trackerType = trackerTypes[trackerSelection];
     cv::Ptr<cv::Tracker> tracker;
-    #if (CV_MINOR_VERSION < 3)
-    {
-        tracker = Tracker::create(trackerType);
-    }
-    #else
-    {
-        if (trackerType == "BOOSTING")
-            tracker = cv::TrackerBoosting::create();
-        if (trackerType == "MIL")
-            tracker = cv::TrackerMIL::create();
-        if (trackerType == "KCF")
-            tracker = cv::TrackerKCF::create();
-        if (trackerType == "TLD")
-            tracker = cv::TrackerTLD::create();
-        if (trackerType == "MEDIANFLOW")
-            tracker = cv::TrackerMedianFlow::create();
-        if (trackerType == "GOTURN")
-            tracker = cv::TrackerGOTURN::create();
-        //if (trackerType == "MOSSE")
-            //tracker = cv::TrackerMOSSE::create();
-    }
-    #endif
+    if (trackerType == "BOOSTING")
+        tracker = cv::TrackerBoosting::create();
+    if (trackerType == "MIL")
+        tracker = cv::TrackerMIL::create();
+    if (trackerType == "KCF")
+        tracker = cv::TrackerKCF::create();
+    if (trackerType == "TLD")
+        tracker = cv::TrackerTLD::create();
+    if (trackerType == "MEDIANFLOW")
+        tracker = cv::TrackerMedianFlow::create();
+    if (trackerType == "GOTURN")
+        tracker = cv::TrackerGOTURN::create();
+    if (trackerType == "MOSSE")
+        tracker = cv::TrackerMOSSE::create();
+    if (trackerType == "CSRT")
+        tracker = cv::TrackerCSRT::create();
+    if (trackerType == "CSRT")
+        tracker = cv::TrackerCSRT::create();
     cv::Rect2d roi;
 
     // process data until program termination
