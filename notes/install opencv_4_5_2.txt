@@ -1,0 +1,20 @@
+### INSTAL OPENCV DEPENDENCIES ***
+sudo apt-get install build-essential libtbb-dev libgtk2.0-dev pkg-config python-numpy python3-numpy
+
+### GET OPENCV SOURCE (RELEASE 4.5.2) ###
+cd ~
+wget https://github.com/Itseez/opencv/archive/4.5.2.zip
+unzip 4.5.2.zip
+rm 4.5.2.zip
+wget https://github.com/opencv/opencv_contrib/archive/4.5.2.zip
+unzip 4.5.2.zip
+rm 4.5.2.zip
+cd opencv-4.5.2
+
+### BUILD AND INSTALL OPENCV ###
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=RELEASE -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.5.2/modules -DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_OPENGL=ON -DWITH_V4L=ON -D WITH_TBB=ON -D BUILD_TBB=ON -D WITH_IPP=OFF -D WITH_OPENMP=ON -D BUILD_DOCS=OFF -D BUILD_PACKAGE=OFF -D BUILD_opencv_world=OFF -D WITH_CUDA=OFF -D WITH_OPENCV_DNN_CUDA=OFF -D OPENCV_DNN_CUDA=OFF -D ENABLE_FAST_MATH=ON -D CUDA_FAST_MATH=OFF -D WITH_CUBLAS=OFF -D WITH_VTK=OFF -D WITH_GTK_2_X=ON -D BUILD_JAVA=OFF -D BUILD_PERF_TESTS=OFF -D OPENCV_ENABLE_NONFREE=TRUE -D BUILD_TESTS=OFF -D WITH_LIBV4L=ON -D CUDA_GENERATION=Auto ..
+make
+sudo make install
+

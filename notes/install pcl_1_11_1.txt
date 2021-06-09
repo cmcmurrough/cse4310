@@ -1,0 +1,14 @@
+### INSTAL PCL DEPENDENCIES ###
+sudo apt-get install freeglut3-dev libboost-all-dev libeigen3-dev libflann-dev libvtk7-dev libusb-1.0-0-dev libqhull-dev cmake-curses-gui
+
+﻿### GET PCL SOURCE ###
+cd ~
+git clone https://github.com/PointCloudLibrary/pcl -b pcl-1.11.1
+cd pcl
+
+### BUILD AND INSTALL PCL ###
+mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. 
+make
+sudo make install
