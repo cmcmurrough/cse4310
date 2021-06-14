@@ -1,5 +1,5 @@
 //
-//    Copyright 2018 Christopher D. McMurrough
+//    Copyright 2021 Christopher D. McMurrough
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -70,19 +70,19 @@ int main(int argc, char **argv)
 {
     // open the input image
     std::string inputFileName = "test.png";
-	cv::Mat imageIn;
-	imageIn = cv::imread(inputFileName, cv::IMREAD_COLOR);
+    cv::Mat imageIn;
+    imageIn = cv::imread(inputFileName, cv::IMREAD_COLOR);
 
-	// check for file error
-	if(!imageIn.data)
-	{
-		std::cout << "Error while opening file " << inputFileName << std::endl;
-		return 0;
-	}
-	
+    // check for file error
+    if(!imageIn.data)
+    {
+        std::cout << "Error while opening file " << inputFileName << std::endl;
+        return 0;
+    }
+    
     // display the input image
-	cv::imshow("imageIn", imageIn);
-	cv::setMouseCallback("imageIn", clickCallback, &imageIn);
-	cv::waitKey();
+    cv::imshow("imageIn", imageIn);
+    cv::setMouseCallback("imageIn", clickCallback, &imageIn);
+    cv::waitKey();
 }
 

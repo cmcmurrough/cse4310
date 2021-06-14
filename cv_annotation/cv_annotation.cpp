@@ -1,5 +1,5 @@
 //
-//    Copyright 2018 Christopher D. McMurrough
+//    Copyright 2021 Christopher D. McMurrough
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -37,53 +37,53 @@ int main(int argc, char **argv)
 {
     // open the input image
     std::string inputFileName = "test.png";
-	cv::Mat imageIn;
-	imageIn = cv::imread(inputFileName, cv::IMREAD_COLOR);
+    cv::Mat imageIn;
+    imageIn = cv::imread(inputFileName, cv::IMREAD_COLOR);
 
-	// check for file error
-	if(!imageIn.data)
-	{
-		std::cout << "Error while opening file " << inputFileName << std::endl;
-		return 0;
-	}
+    // check for file error
+    if(!imageIn.data)
+    {
+        std::cout << "Error while opening file " << inputFileName << std::endl;
+        return 0;
+    }
 
-	// get the image size
-	std::cout << "image width: " << imageIn.size().width << std::endl;
-	std::cout << "image height: " << imageIn.size().height << std::endl;
-	std::cout << "image channels: " << imageIn.channels() << std::endl;
+    // get the image size
+    std::cout << "image width: " << imageIn.size().width << std::endl;
+    std::cout << "image height: " << imageIn.size().height << std::endl;
+    std::cout << "image channels: " << imageIn.channels() << std::endl;
 
     // display the input image
-	cv::imshow("imageIn", imageIn);
-	cv::waitKey();
+    cv::imshow("imageIn", imageIn);
+    cv::waitKey();
 
-	// create a 200 pixel wide region of interest (ROI) on the center of the image
+    // create a 200 pixel wide region of interest (ROI) on the center of the image
     cv::Point p1(imageIn.cols / 2 - 100, imageIn.rows / 2 - 100);
     cv::Point p2(imageIn.cols / 2 + 100, imageIn.rows / 2 + 100);
-	cv::Rect region(p1, p2);
+    cv::Rect region(p1, p2);
 
-	// extract the ROI into its own image and display
-	cv::Mat imageROI = imageIn(region);
-	cv::imshow("imageROI", imageROI);
-	cv::waitKey();
+    // extract the ROI into its own image and display
+    cv::Mat imageROI = imageIn(region);
+    cv::imshow("imageROI", imageROI);
+    cv::waitKey();
 
-	// draw a red rectangle around the ROI and update the display
-	cv::rectangle(imageIn, region, cv::Scalar(0, 0, 255), 3);
-	cv::imshow("imageIn", imageIn);
-	cv::waitKey();
+    // draw a red rectangle around the ROI and update the display
+    cv::rectangle(imageIn, region, cv::Scalar(0, 0, 255), 3);
+    cv::imshow("imageIn", imageIn);
+    cv::waitKey();
 
     // draw a blue circle around the ROI and update the display
     cv::Point center(imageIn.cols / 2, imageIn.rows / 2);
-	cv::circle(imageIn, center, 100, cv::Scalar(255, 0, 0), 3);
-	cv::imshow("imageIn", imageIn);
-	cv::waitKey();
+    cv::circle(imageIn, center, 100, cv::Scalar(255, 0, 0), 3);
+    cv::imshow("imageIn", imageIn);
+    cv::waitKey();
 
     // draw black lines from corner to corner and display
     cv::Point cornerTopLeft(0, 0);
     cv::Point cornerTopRight(imageIn.cols - 1, 0);
     cv::Point cornerBottomLeft(0, imageIn.rows - 1);
     cv::Point cornerBottomRight(imageIn.cols - 1, imageIn.rows - 1);
-	cv::line(imageIn, cornerTopLeft, cornerBottomRight, cv::Scalar(0, 0, 0), 3);
-	cv::line(imageIn, cornerTopRight, cornerBottomLeft, cv::Scalar(0, 0, 0), 3);
-	cv::imshow("imageIn", imageIn);
-	cv::waitKey();
+    cv::line(imageIn, cornerTopLeft, cornerBottomRight, cv::Scalar(0, 0, 0), 3);
+    cv::line(imageIn, cornerTopRight, cornerBottomLeft, cv::Scalar(0, 0, 0), 3);
+    cv::imshow("imageIn", imageIn);
+    cv::waitKey();
 }
