@@ -1,8 +1,5 @@
 project (cv_model)
-cmake_minimum_required(VERSION 2.8)
-
-# explicitly set c++11 
-set(CMAKE_CXX_STANDARD 11)
+cmake_minimum_required(VERSION 3.15)
 
 # configure OpenCV
 find_package(OpenCV REQUIRED)
