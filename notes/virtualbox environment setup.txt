@@ -3,4 +3,9 @@ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
 
 ### INSTALL DEVELOPMENT TOOLS ###
 sudo apt-get install gedit git build-essential cmake cmake-curses-gui meld unzip ssh openssh-server net-tools
+
+### INSTALL VSCODE IDE (OPTIONAL) ###
 sudo snap install --classic code
+
+### INSTALL CODEBLOCKS IDE (OPTIONAL) ###
+sudo apt-get install codeblocks
