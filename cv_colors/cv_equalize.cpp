@@ -1,5 +1,5 @@
 //
-//    Copyright 2018 Christopher D. McMurrough
+//    Copyright 2021 Christopher D. McMurrough
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
 //
 
 /*******************************************************************************************************************//**
- * @file cv_colors.cpp
- * @brief C++ example of color histograms equalization in OpenCV
+ * @file cv_equalize.cpp
+ * @brief C++ example of image equalization in OpenCV
  * @author Christopher D. McMurrough
  **********************************************************************************************************************/
 
