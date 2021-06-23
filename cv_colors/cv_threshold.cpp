@@ -19,7 +19,7 @@
  * @file cv_threshold.cpp
  * @brief C++ example of image thresholding in OpenCV
  * @author Christopher D. McMurrough
- **********************************************************************************************************************/
+ * **********************************************************************************************************************/
 
 // include necessary dependencies
 #include <iostream>
@@ -64,11 +64,10 @@ int main(int argc, char **argv)
 
     // threshold the image
     cv::Mat imageThreshold;
-    double thresh = 128;
+    double thresh = 100;
     double maxval = 255;
-
-    cv::threshold(imageGray, imageThreshold, thresh, maxval);
-
+    int thresholdType = 0;
+    cv::threshold(imageGray, imageThreshold, thresh, maxval, thresholdType);
 
     // display the images
     cv::imshow("imageIn", imageIn);

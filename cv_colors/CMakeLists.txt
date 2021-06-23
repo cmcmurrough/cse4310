@@ -15,3 +15,5 @@ target_link_libraries(cv_histogram ${OpenCV_LIBS})
 add_executable(cv_equalize cv_equalize.cpp)
 target_link_libraries(cv_equalize ${OpenCV_LIBS})
 
+add_executable(cv_threshold cv_threshold.cpp)
+target_link_libraries(cv_threshold ${OpenCV_LIBS})
