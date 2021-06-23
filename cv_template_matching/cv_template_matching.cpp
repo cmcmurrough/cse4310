@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "opencv2/opencv.hpp"
+#include "opencv2/imgproc/imgproc_c.h"
 
 // configuration parameters
 #define NUM_COMNMAND_LINE_ARGUMENTS 2
