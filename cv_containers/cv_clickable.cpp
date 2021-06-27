@@ -27,7 +27,7 @@
 #include "opencv2/opencv.hpp"
 
 // function prototypes
-static void clickCallback(int event, int x, int y, int flags, void* userdata);
+static void clickCallback(int event, int x, int y, int flags, void* param);
 
 /*******************************************************************************************************************//**
  * @brief handler for image click callbacks
