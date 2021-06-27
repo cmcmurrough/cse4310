@@ -49,7 +49,7 @@ static void clickCallback(int event, int x, int y, int flags, void* param)
         std::cout << "LEFT CLICK (" << x << ", " << y << ")" << std::endl;
         
         // get the color value at the clicked pixel location and print to console
-        cv::Vec3b pixel = imageIn.at<cv::Vec3b>(y, x)
+        cv::Vec3b pixel = imageIn.at<cv::Vec3b>(y, x);
         std::cout << pixel << std::endl;
     }
     else if(event == cv::EVENT_RBUTTONDOWN)
