@@ -41,7 +41,7 @@ static void clickCallback(int event, int x, int y, int flags, void* userdata);
 static void clickCallback(int event, int x, int y, int flags, void* userdata)
 {
     // cast userdata to a cv::Mat
-    cv::Mat imageSelect = *(cv::Mat *)param;
+    cv::Mat imageIn = *(cv::Mat *)param;
     
     // handle the mouse event types
     if(event == cv::EVENT_LBUTTONDOWN)
