@@ -31,19 +31,26 @@ static void clickCallback(int event, int x, int y, int flags, void* userdata);
 
 /*******************************************************************************************************************//**
  * @brief handler for image click callbacks
- * @param[in] event number of command line arguments
- * @param[in] x string array of command line arguments
- * @param[in] y string array of command line arguments
- * @param[in] flags string array of command line arguments
- * @param[in] userdata string array of command line arguments
- * @return return code (0 for normal termination)
+ * @param[in] event mouse event type
+ * @param[in] x x coordinate of event
+ * @param[in] y y coordinate of event
+ * @param[in] flags additional event flags 
+ * @param[in] param input image passed as (void *)
  * @author Christoper D. McMurrough
  **********************************************************************************************************************/
 static void clickCallback(int event, int x, int y, int flags, void* userdata)
 {
+    // cast userdata to a cv::Mat
+    cv::Mat imageSelect = *(cv::Mat *)param;
+    
+    // handle the mouse event types
     if(event == cv::EVENT_LBUTTONDOWN)
     {
         std::cout << "LEFT CLICK (" << x << ", " << y << ")" << std::endl;
+        
+        // get the color value at the clicked pixel location and print to console
+        cv::Vec3b pixel = imageIn.at<cv::Vec3b>(y, x)
+        std::cout << pixel << std::endl;
     }
     else if(event == cv::EVENT_RBUTTONDOWN)
     {
@@ -85,4 +92,3 @@ int main(int argc, char **argv)
     cv::setMouseCallback("imageIn", clickCallback, &imageIn);
     cv::waitKey();
 }
-
