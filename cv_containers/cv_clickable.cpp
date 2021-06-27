@@ -35,10 +35,10 @@ static void clickCallback(int event, int x, int y, int flags, void* userdata);
  * @param[in] x x coordinate of event
  * @param[in] y y coordinate of event
  * @param[in] flags additional event flags 
- * @param[in] param input image passed as (void *)
+ * @param[in] param user data passed as void* (in this case, the input image)
  * @author Christoper D. McMurrough
  **********************************************************************************************************************/
-static void clickCallback(int event, int x, int y, int flags, void* userdata)
+static void clickCallback(int event, int x, int y, int flags, void* param)
 {
     // cast userdata to a cv::Mat
     cv::Mat imageIn = *(cv::Mat *)param;
