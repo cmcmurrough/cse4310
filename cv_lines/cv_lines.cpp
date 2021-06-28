@@ -79,8 +79,8 @@ int main(int argc, char **argv)
     const double rho = 1;               // resolution of rho parameter in pixels
     const double theta = CV_PI / 180;   // resolution of theta parameter in radians
     const double houghThreshold = 50;   // minimum number of intersections to detect a line
-    const double minLineLength = 50;    // minimum number of points on a line
-    const double maxLineGap = 10;       // maximum gap between points on a line
+    const double minLineLength = 200;    // minimum number of points on a line
+    const double maxLineGap = 40;       // maximum gap between points on a line
     cv::HoughLinesP(imageEdges, lines, rho, theta, houghThreshold, minLineLength, maxLineGap);
     for( size_t i = 0; i < lines.size(); i++ )
     {

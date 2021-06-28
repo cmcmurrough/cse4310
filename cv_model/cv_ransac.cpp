@@ -1,5 +1,5 @@
 //
-//    Copyright 2018 Christopher D. McMurrough
+//    Copyright 2021 Christopher D. McMurrough
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -120,7 +120,7 @@ int main(int argc, char **argv)
 
     // begin RANSAC iterations
     const int maxIterations = 5000;
-    const int minInliers = 600;
+    const int minInliers = 200;
     const double inlierDistance = 10;
     cv::Mat imageResult = cv::Mat::zeros(imageContours.size(), CV_8UC3);
     for(int i = 0; i < maxIterations; i++)
@@ -132,9 +132,9 @@ int main(int argc, char **argv)
         // select 2 unique random points from the image
         int sampleIndex1 = rand.uniform(0, points.size());
         int sampleIndex2 = rand.uniform(0, points.size());
-        while(sampleIndex2 == sampleIndex1)
+        if(sampleIndex2 == sampleIndex1)
         {
-            sampleIndex2 = rand.uniform(0, points.size());
+            continue;
         }
         cv::Point p1 = points.at(sampleIndex1);
         cv::Point p2 = points.at(sampleIndex2);
