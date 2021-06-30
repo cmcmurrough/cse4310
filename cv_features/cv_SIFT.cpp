@@ -1,5 +1,5 @@
 //
-//    Copyright 2018 Christopher D. McMurrough
+//    Copyright 2021 Christopher D. McMurrough
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -25,9 +25,6 @@
 #include <iostream>
 #include <string>
 #include "opencv2/opencv.hpp"
-#include "opencv2/xfeatures2d.hpp"
-#include <iostream>
-#include <stdio.h>
 
 // configuration parameters
 #define NUM_COMNMAND_LINE_ARGUMENTS 1
@@ -65,15 +62,15 @@ int main(int argc, char **argv)
     cv::Mat imageGray;
     cv::cvtColor(imageIn, imageGray, cv::COLOR_BGR2GRAY);
 
-	// detect SURF keypoints
-	const int minHessian = 400;
-	cv::Ptr<cv::xfeatures2d::SIFT> detector = cv::xfeatures2d::SIFT::create(minHessian);
-	std::vector<cv::KeyPoint> keypoints;
-	detector->detect(imageGray, keypoints);
+    // detect SURF keypoints
+    const int minHessian = 400;
+    cv::Ptr<cv::SIFT> detector = cv::SIFT::create(minHessian);
+    std::vector<cv::KeyPoint> keypoints;
+    detector->detect(imageGray, keypoints);
 
-	// draw the keypoints
-	cv::Mat imageKeypoints;
-	cv::drawKeypoints(imageGray, keypoints, imageKeypoints, cv::Scalar::all(-1), cv::DrawMatchesFlags::DEFAULT);
+    // draw the keypoints
+    cv::Mat imageKeypoints;
+    cv::drawKeypoints(imageGray, keypoints, imageKeypoints, cv::Scalar::all(-1), cv::DrawMatchesFlags::DEFAULT);
 
     // display the images
     cv::imshow("imageIn", imageIn);
@@ -83,3 +80,4 @@ int main(int argc, char **argv)
 
     return 0;
 }
+

@@ -1,5 +1,5 @@
 //
-//    Copyright 2018 Christopher D. McMurrough
+//    Copyright 2021 Christopher D. McMurrough
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -73,10 +73,18 @@ int main(int argc, char **argv)
     const double cannyThreshold2 = 200;
     const int cannyAperture = 3;
     cv::Canny(imageGray, imageEdges, cannyThreshold1, cannyThreshold2, cannyAperture);
-
+    
+    // erode and dilate the edges to remove noise
+    int morphologySize = 1;
+    cv::Mat edgesDilated;
+    cv::dilate(imageEdges, edgesDilated, cv::Mat(), cv::Point(-1, -1), morphologySize);
+    cv::Mat edgesEroded;
+    cv::erode(edgesDilated, edgesEroded, cv::Mat(), cv::Point(-1, -1), morphologySize);
+    
     // locate the image contours (after applying a threshold or canny)
     std::vector<std::vector<cv::Point> > contours;
-    cv::findContours(imageEdges, contours, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
+    //std::vector<int> hierarchy;
+    cv::findContours(edgesEroded, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
 
     // draw the contours
     cv::Mat imageContours = cv::Mat::zeros(imageEdges.size(), CV_8UC3);
@@ -121,7 +129,7 @@ int main(int argc, char **argv)
 
     // draw the ellipses
     cv::Mat imageEllipse = cv::Mat::zeros(imageEdges.size(), CV_8UC3);
-    const int minEllipseInliers = 500;
+    const int minEllipseInliers = 50;
     for(int i = 0; i < contours.size(); i++)
     {
         // draw any ellipse with sufficient inliers
@@ -136,8 +144,11 @@ int main(int argc, char **argv)
     cv::imshow("imageIn", imageIn);
     cv::imshow("imageGray", imageGray);
     cv::imshow("imageEdges", imageEdges);
+    cv::imshow("edges dilated", edgesDilated);
+    cv::imshow("edges eroded", edgesEroded);
     cv::imshow("imageContours", imageContours);
     cv::imshow("imageRectangles", imageRectangles);
     cv::imshow("imageEllipse", imageEllipse);
+        
     cv::waitKey();
 }

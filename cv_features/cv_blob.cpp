@@ -1,5 +1,5 @@
 //
-//    Copyright 2018 Christopher D. McMurrough
+//    Copyright 2021 Christopher D. McMurrough
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -25,9 +25,6 @@
 #include <iostream>
 #include <string>
 #include "opencv2/opencv.hpp"
-#include "opencv2/xfeatures2d.hpp"
-#include <iostream>
-#include <stdio.h>
 
 // configuration parameters
 #define NUM_COMNMAND_LINE_ARGUMENTS 1
@@ -95,3 +92,4 @@ int main(int argc, char **argv)
 
     return 0;
 }
+
