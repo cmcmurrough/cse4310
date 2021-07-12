@@ -1,7 +1,7 @@
 # additional OpenCV dependencies for camera capture / streaming
 sudo apt install libavcodec-dev libavformat-dev libswscale-dev libavresample-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libxvidcore-dev x264 libx264-dev libfaac-dev libmp3lame-dev libtheora-dev  libfaac-dev libmp3lame-dev libvorbis-dev ffmpeg vlc libdc1394-22 libdc1394-22-dev libxine2-dev libv4l-dev v4l-utils
 
-# install and run bleachbit to recover disk space
+# install and run bleachbit to recover disk space (see bleachbit.png for details)
 sudo apt-get install bleachbit
 sudo bleachbit
 
