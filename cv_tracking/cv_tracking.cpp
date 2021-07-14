@@ -1,5 +1,5 @@
 //
-//    Copyright 2018 Christopher D. McMurrough
+//    Copyright 2021 Christopher D. McMurrough
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -75,93 +75,60 @@ int main(int argc, char **argv)
     cv::namedWindow(DISPLAY_WINDOW_NAME, cv::WINDOW_AUTOSIZE);
 
     // create the tracker object
-    std::string trackerTypes[9] = {"BOOSTING", "MIL", "KCF", "TLD","MEDIANFLOW", "GOTURN", "MOSSE", "CSRT", "HOG"};
+    std::string trackerTypes[9] = {"CSRT", "GOTURN", "KCF", "MIL"};
     std::string trackerType = trackerTypes[trackerSelection];
     cv::Ptr<cv::Tracker> tracker;
-    if (trackerType == "BOOSTING")
-        tracker = cv::TrackerBoosting::create();
-    if (trackerType == "MIL")
-        tracker = cv::TrackerMIL::create();
-    if (trackerType == "KCF")
-        tracker = cv::TrackerKCF::create();
-    if (trackerType == "TLD")
-        tracker = cv::TrackerTLD::create();
-    if (trackerType == "MEDIANFLOW")
-        tracker = cv::TrackerMedianFlow::create();
+    if (trackerType == "CSRT")
+        tracker = cv::TrackerCSRT::create();
     if (trackerType == "GOTURN")
         tracker = cv::TrackerGOTURN::create();
-    if (trackerType == "MOSSE")
-        tracker = cv::TrackerMOSSE::create();
-    if (trackerType == "CSRT")
-        tracker = cv::TrackerCSRT::create();
-    if (trackerType == "CSRT")
-        tracker = cv::TrackerCSRT::create();
-    cv::Rect2d roi;
+    if (trackerType == "KCF")
+        tracker = cv::TrackerKCF::create();
+    if (trackerType == "MIL")
+        tracker = cv::TrackerMIL::create();
 
-    // process data until program termination
-    bool doCapture = true;
-    int frameCount = 0;
-    while(doCapture)
+    // declare variables for tracking
+    cv::Rect roi;
+    cv::Mat frame;
+
+    // get bounding box
+    bool captureSuccess = capture.read(frame);
+    roi = cv::selectROI(DISPLAY_WINDOW_NAME, frame);
+
+    // exit if ROI was not selected
+    if(roi.width==0 || roi.height==0)
     {
-        // get the start time
-        double startTicks = static_cast<double>(cv::getTickCount());
+        return 0;
+    }
 
-        // attempt to acquire and process an image frame
-        cv::Mat captureFrame;
-        bool captureSuccess = capture.read(captureFrame);
-        bool trackerSuccess = false;
+    // initialize the tracker
+    tracker->init(frame,roi);
+
+    // perform tracking iterations on each frame
+    std::cout << "Starting tracker, press 'q' to quit" << std::endl;
+    bool tracking = true;
+    while(tracking)
+    {
+        // get frame from the video
+        captureSuccess = capture.read(frame);
+
         if(captureSuccess)
         {
-            // check for first frame
-            if(frameCount == 0)
-            {
-                // obtain the initial ROI and initialize tracker
-                roi = cv::selectROI(DISPLAY_WINDOW_NAME, captureFrame, true, false);
-                tracker->init(captureFrame, roi);
-                trackerSuccess = true;
-            }
-            else
-            {
-                // perform one iteration of tracking
-                trackerSuccess = tracker->update(captureFrame, roi);
-            }
+            // update the tracking result
+            tracker->update(frame,roi);
 
-            // increment the frame counter
-            frameCount++;
-        }
-        else
-        {
-            std::printf("Unable to acquire image frame! \n");
-            continue;
-        }
+            // annotate and show the frame
+            cv::rectangle(frame, roi, cv::Scalar( 255, 0, 0 ), 2, 1 );
+            cv::imshow(DISPLAY_WINDOW_NAME, frame);
 
-        // update the GUI window if necessary
-        if(captureSuccess)
-        {
-            // display the frame
-            if(trackerSuccess)
+            // check for user termination
+            if(cv::waitKey(1)=='q')
             {
-                cv::rectangle(captureFrame, roi, cv::Scalar( 255, 0, 0 ), 2, 1);
-            }
-            cv::imshow(DISPLAY_WINDOW_NAME, captureFrame);
-
-            // get the number of milliseconds per frame
-            int delayMs = (1.0 / captureFPS) * 1000;
-
-            // check for program termination
-            if(((char) cv::waitKey(delayMs)) == 'q')
-            {
-                doCapture = false;
+                tracking = false;
             }
         }
-
-        // compute the frame processing time
-        double endTicks = static_cast<double>(cv::getTickCount());
-        double elapsedTime = (endTicks - startTicks) / cv::getTickFrequency();
-        std::cout << "Frame processing time: " << elapsedTime << std::endl;
     }
 
     // release program resources before returning
     capture.release();
-    cv::destroyAllWindows();
 }
