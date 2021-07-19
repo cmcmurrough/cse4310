@@ -40,20 +40,107 @@ bool processFrame(const cv::Mat &imageIn, cv::Mat &imageOut);
  * @brief Process a single image frame
  * @param[in] imageIn the input image frame
  * @param[out] imageOut the processed image frame
+ * @param[in] network input DNN network
  * @return true if frame was processed successfully
  * @author Christopher D. McMurrough
  **********************************************************************************************************************/
-bool processFrame(const cv::Mat &imageIn, cv::Mat &imageOut)
+bool processFrame(const cv::Mat &imageIn, cv::Mat &imageOut, cv::dnn::Net &network)
 {
     // copy the input image frame to the ouput image (deep copy)
     imageOut = imageIn.clone();
 
-    // copy the input image frame to the ouput image (shallow copy, if you just want to display)
-    //imageOut = imageIn;
+
+
+
+
+
+
+
+
+
+
+		static cv::Mat blobFromImg;
+        bool swapRB = true;
+        cv::dnn::blobFromImage(imageIn, blobFromImg, 1, cv::Size(416, 416), cv::Scalar(), swapRB, false);
+        //std::cout << blobFromImg.size() << endl; 
+        
+        float scale = 1.0 / 255.0;
+        cv::Scalar mean = 0;
+        network.setInput(blobFromImg, "", scale, mean);
+
+        cv::Mat outMat;
+        network.forward(outMat);
+            // rows represent number of detected object (proposed region)
+            int rowsNoOfDetection = outMat.rows;
+
+            // The coluns looks like this, The first is region center x, center y, width
+            // height, The class 1 - N is the column entries, which gives you a number, 
+            // where the biggist one corrsponding to most probable class. 
+            // [x ; y ; w; h; class 1 ; class 2 ; class 3 ;  ; ;....]
+            //  
+            int colsCoordinatesPlusClassScore = outMat.cols;
+            // Loop over number of detected object. 
+            for (int j = 0; j < rowsNoOfDetection; ++j)
+            {
+                // for each row, the score is from element 5 up
+                // to number of classes index (5 - N columns)
+                cv::Mat scores = outMat.row(j).colRange(5, colsCoordinatesPlusClassScore);
+
+                cv::Point PositionOfMax;
+                double confidence;
+
+                // This function find indexes of min and max confidence and related index of element. 
+                // The actual index is match to the concrete class of the object.
+                // First parameter is Mat which is row [5fth - END] scores,
+                // Second parameter will gives you min value of the scores. NOT needed 
+                // confidence gives you a max value of the scores. This is needed, 
+                // Third parameter is index of minimal element in scores
+                // the last is position of the maximum value.. This is the class!!
+                cv::minMaxLoc(scores, 0, &confidence, 0, &PositionOfMax);
+            
+                if (confidence > 0.0001)
+                {
+// thease four lines are
+// [x ; y ; w; h;
+                    int centerX = (int)(outMat.at<float>(j, 0) * imageOut.cols); 
+                    int centerY = (int)(outMat.at<float>(j, 1) * imageOut.rows); 
+                    int width =   (int)(outMat.at<float>(j, 2) * imageOut.cols+20); 
+                   int height =   (int)(outMat.at<float>(j, 3) * imageOut.rows+100); 
+
+                    int left = centerX - width / 2;
+                    int top = centerY - height / 2;
+
+
+                    std::stringstream ss;
+                    ss << PositionOfMax.x;
+                    std::string clas = ss.str();
+                    int color = PositionOfMax.x * 10;
+                    cv::putText(imageOut, clas, cv::Point(left, top), 1, 2, cv::Scalar(color, 255, 255), 2, false);
+                    std::stringstream ss2;
+                    ss << confidence;
+                    std::string conf = ss.str();
+
+                    cv::rectangle(imageOut, cv::Rect(left, top, width, height), cv::Scalar(color, 0, 0), 2, 8, 0);
+                }
+            }
+			
+			
+			
+			
+			
+			
+			
 
     // return true on success
     return true;
 }
+
+
+
+
+
+
+
 
 /*******************************************************************************************************************//**
  * @brief program entry point
@@ -87,7 +174,7 @@ int main(int argc, char **argv)
     }
 	
 	// initialize YOLO
-	std::string model = ".yolov3-tiny.weights";
+	std::string model = "yolov3-tiny.weights";
     std::string config = "yolov3-tiny.cfg"; 
     cv::dnn::Net network = cv::dnn::readNet(model, config,"Darknet");
     network.setPreferableBackend(cv::dnn::DNN_BACKEND_DEFAULT);
@@ -118,7 +205,7 @@ int main(int argc, char **argv)
         if(captureSuccess)
         {
             // process the image frame
-            processFrame(captureFrame, processedFrame);
+            processFrame(captureFrame, processedFrame, network);
 
             // increment the frame counter
             frameCount++;
