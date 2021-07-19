@@ -87,9 +87,9 @@ int main(int argc, char **argv)
     }
 	
 	// initialize YOLO
-	std::string model = "yolov3-tiny.weights";
+	std::string model = ".yolov3-tiny.weights";
     std::string config = "yolov3-tiny.cfg"; 
-    cv::dnn::Net network = readNet(model, config,"Darknet");
+    cv::dnn::Net network = cv::dnn::readNet(model, config,"Darknet");
     network.setPreferableBackend(cv::dnn::DNN_BACKEND_DEFAULT);
     network.setPreferableTarget(cv::dnn::DNN_TARGET_OPENCL);
 	
