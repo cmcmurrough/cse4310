@@ -1,5 +1,5 @@
 //
-//    Copyright 2018 Christopher D. McMurrough
+//    Copyright 2021 Christopher D. McMurrough
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 //
 
 /*******************************************************************************************************************//**
- * @file cv::load_video.cpp
+ * @file cv_load_video.cpp
  * @brief C++ example for acquiring and processing image frames with OpenCV
  * @author Christopher D. McMurrough
  **********************************************************************************************************************/
