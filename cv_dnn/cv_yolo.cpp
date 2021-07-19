@@ -61,7 +61,7 @@ bool processFrame(const cv::Mat &imageIn, cv::Mat &imageOut, cv::dnn::Net &netwo
 
     // set the blob as input to the network
     const float blob_scale = 1.0 / 255.0;
-    const float cv::Scalar blob_mean = 0;
+    const cv::Scalar blob_mean = 0;
     network.setInput(blobFromImg, "", blob_scale, blob_mean);
 
     // feed forward the inputs through the network
