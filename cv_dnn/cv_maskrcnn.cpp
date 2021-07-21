@@ -97,14 +97,14 @@ int main(int argc, char **argv)
 		colors.push_back(Scalar(r, g, b, 255.0));
 	}
 
-	// Give the configuration and weight files for the model
-	String textGraph = "./mask_rcnn_inception_v2_coco_2018_01_28.pbtxt";
-	String modelWeights = "./mask_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb";
+	// define the configuration file paths
+	std::String textGraph = "./mask_rcnn_inception_v2_coco_2018_01_28.pbtxt";
+	std::String modelWeights = "./mask_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb";
 
-	// Load the network
-	Net net = readNetFromTensorflow(modelWeights, textGraph);
-	net.setPreferableBackend(DNN_BACKEND_OPENCV);
-	net.setPreferableTarget(DNN_TARGET_CPU);
+	// load the DNN network
+	cv::dnn::Net network = readNetFromTensorflow(modelWeights, textGraph);
+	network.setPreferableBackend(DNN_BACKEND_OPENCV);
+	network.setPreferableTarget(DNN_TARGET_CPU);
 
 	// Open a video file or an image file or a camera stream.
 	string str, outputFile;
@@ -135,14 +135,14 @@ int main(int argc, char **argv)
 		//blobFromImage(frame, blob);
 
 		//Sets the input to the network
-		net.setInput(blob);
+		network.setInput(blob);
 
 		// Runs the forward pass to get output from the output layers
 		std::vector<String> outNames(2);
 		outNames[0] = "detection_out_final";
 		outNames[1] = "detection_masks";
 		vector<Mat> outs;
-		net.forward(outs, outNames);
+		network.forward(outs, outNames);
 
 		// Extract the bounding box and mask for each of the detected objects
 		postprocess(frame, outs);
@@ -150,7 +150,7 @@ int main(int argc, char **argv)
 		// Put efficiency information. The function getPerfProfile returns the overall time for inference(t) and the timings for each of the layers(in layersTimes)
 		vector<double> layersTimes;
 		double freq = getTickFrequency() / 1000;
-		double t = net.getPerfProfile(layersTimes) / freq;
+		double t = network.getPerfProfile(layersTimes) / freq;
 		string label = format("Mask-RCNN on 2.5 GHz Intel Core i7 CPU, Inference time for a frame : %0.0f ms", t);
 		putText(frame, label, Point(0, 15), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 0, 0));
 
