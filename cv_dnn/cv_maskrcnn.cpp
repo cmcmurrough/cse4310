@@ -26,8 +26,56 @@ void drawBox(Mat& frame, int classId, float conf, Rect box, Mat& objectMask);
 // Postprocess the neural network's output for each frame
 void postprocess(Mat& frame, const vector<Mat>& outs);
 
+
+
+// configuration parameters
+#define NUM_COMNMAND_LINE_ARGUMENTS 2
+#define DISPLAY_WINDOW_NAME "Video Frame"
+
+/*******************************************************************************************************************//**
+ * @brief program entry point
+ * @param[in] argc number of command line arguments
+ * @param[in] argv string array of command line arguments
+ * @return return code (0 for normal termination)
+ * @author Christoper D. McMurrough
+ **********************************************************************************************************************/
 int main()
 {
+    // store video capture parameters
+    std::string fileName;
+    int trackerSelection = 0;
+
+    // validate and parse the command line arguments
+    if(argc != NUM_COMNMAND_LINE_ARGUMENTS + 1)
+    {
+        std::printf("USAGE: %s <file_path> <tracker_type> \n", argv[0]);
+        return 0;
+    }
+    else
+    {
+        fileName = argv[1];
+        trackerSelection = std::atoi(argv[2]);
+    }
+
+    // open the video file
+    cv::VideoCapture capture(fileName);
+    if(!capture.isOpened())
+    {
+        std::printf("Unable to open video source, terminating program! \n");
+        return 0;
+    }
+
+    // get the video source parameters
+    int captureWidth = static_cast<int>(capture.get(cv::CAP_PROP_FRAME_WIDTH));
+    int captureHeight = static_cast<int>(capture.get(cv::CAP_PROP_FRAME_HEIGHT));
+    int captureFPS = static_cast<int>(capture.get(cv::CAP_PROP_FPS));
+    std::cout << "Video source opened successfully (width=" << captureWidth << " height=" << captureHeight << " fps=" << captureFPS << ")!" << std::endl;
+
+    // create image window
+    cv::namedWindow(DISPLAY_WINDOW_NAME, cv::WINDOW_AUTOSIZE);
+
+
+
 	// Load names of classes
 	string classesFile = "./mask_rcnn_inception_v2_coco_2018_01_28/mscoco_labels.names";
 	ifstream ifs(classesFile.c_str());
@@ -49,7 +97,7 @@ int main()
 	}
 
 	// Give the configuration and weight files for the model
-	String textGraph = "./mask_rcnn_inception_v2_coco_2018_01_28/mask_rcnn_inception_v2_coco_2018_01_28.pbtxt";
+	String textGraph = "./mask_rcnn_inception_v2_coco_2018_01_28/frozen";
 	String modelWeights = "./mask_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb";
 
 	// Load the network
@@ -59,7 +107,7 @@ int main()
 
 	// Open a video file or an image file or a camera stream.
 	string str, outputFile;
-	VideoCapture cap(0);//Depending on the camera port id, you can modify it.
+	//VideoCapture cap(0);//Depending on the camera port id, you can modify it.
 	//VideoWriter video;
 	Mat frame, blob;
 
