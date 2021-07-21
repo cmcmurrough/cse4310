@@ -55,7 +55,6 @@ int main(int argc, char **argv)
     else
     {
         fileName = argv[1];
-        trackerSelection = std::atoi(argv[2]);
     }
 
     // open the video file
