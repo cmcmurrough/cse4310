@@ -148,13 +148,6 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    // initialize YOLO
-    std::string model = "yolov3-tiny.weights";
-    std::string config = "yolov3-tiny.cfg";
-    cv::dnn::Net network = cv::dnn::readNet(model, config, "Darknet");
-    network.setPreferableBackend(cv::dnn::DNN_BACKEND_DEFAULT);
-    network.setPreferableTarget(cv::dnn::DNN_TARGET_OPENCL);
-
     // get the video source parameters
     int captureWidth = static_cast<int>(capture.get(cv::CAP_PROP_FRAME_WIDTH));
     int captureHeight = static_cast<int>(capture.get(cv::CAP_PROP_FRAME_HEIGHT));
@@ -163,6 +156,13 @@ int main(int argc, char **argv)
 
     // create image window
     cv::namedWindow(DISPLAY_WINDOW_NAME, cv::WINDOW_AUTOSIZE);
+
+    // initialize YOLO
+    std::string model = "yolov3-tiny.weights";
+    std::string config = "yolov3-tiny.cfg";
+    cv::dnn::Net network = cv::dnn::readNet(model, config, "Darknet");
+    network.setPreferableBackend(cv::dnn::DNN_BACKEND_DEFAULT);
+    network.setPreferableTarget(cv::dnn::DNN_TARGET_OPENCL);
 
     // process data until program termination
     bool doCapture = true;
