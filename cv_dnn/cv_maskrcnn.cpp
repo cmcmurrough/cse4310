@@ -40,7 +40,7 @@ void postprocess(Mat& frame, const vector<Mat>& outs);
  * @return return code (0 for normal termination)
  * @author Christoper D. McMurrough
  **********************************************************************************************************************/
-int main()
+int main(int argc, char **argv)
 {
     // store video capture parameters
     std::string fileName;
