@@ -30,7 +30,7 @@ void postprocess(Mat& frame, const vector<Mat>& outs);
 
 
 // configuration parameters
-#define NUM_COMNMAND_LINE_ARGUMENTS 2
+#define NUM_COMNMAND_LINE_ARGUMENTS 1
 #define DISPLAY_WINDOW_NAME "Video Frame"
 
 /*******************************************************************************************************************//**
@@ -98,7 +98,7 @@ int main(int argc, char **argv)
 	}
 
 	// Give the configuration and weight files for the model
-	String textGraph = "./mask_rcnn_inception_v2_coco_2018_01_28/frozen";
+	String textGraph = "./mask_rcnn_inception_v2_coco_2018_01_28.pbtxt";
 	String modelWeights = "./mask_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb";
 
 	// Load the network
