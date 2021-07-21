@@ -107,7 +107,7 @@ int main()
 
 	// Open a video file or an image file or a camera stream.
 	string str, outputFile;
-	//VideoCapture cap(0);//Depending on the camera port id, you can modify it.
+	//VideoCapture capture(0);//Depending on the camera port id, you can modify it.
 	//VideoWriter video;
 	Mat frame, blob;
 
@@ -119,7 +119,7 @@ int main()
 	while (waitKey(1) < 0)
 	{
 		// get frame from the video
-		cap >> frame;
+		capture >> frame;
 
 		// Stop the program if reached end of video
 		if (frame.empty()) 
@@ -160,7 +160,7 @@ int main()
 		imshow(kWinName, frame);
 
 	}
-	cap.release();
+	capture.release();
 	return 0;
 }
 
