@@ -115,6 +115,8 @@ bool processFrame(const cv::Mat &imageIn, cv::Mat &imageOut, cv::dnn::Net &netwo
     return true;
 }
 
+void drawInference(int classID, float confidence, c)
+
 /*******************************************************************************************************************/ /**
  * @brief program entry point
  * @param[in] argc number of command line arguments
