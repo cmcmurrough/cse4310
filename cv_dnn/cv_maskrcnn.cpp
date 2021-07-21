@@ -49,7 +49,7 @@ int main(int argc, char **argv)
     // validate and parse the command line arguments
     if(argc != NUM_COMNMAND_LINE_ARGUMENTS + 1)
     {
-        std::printf("USAGE: %s <file_path> <tracker_type> \n", argv[0]);
+        std::printf("USAGE: %s <file_path> \n", argv[0]);
         return 0;
     }
     else
@@ -80,9 +80,9 @@ int main(int argc, char **argv)
 
 
 	// Load names of classes
-	string classesFile = "./mask_rcnn_inception_v2_coco_2018_01_28/mscoco_labels.names";
-	ifstream ifs(classesFile.c_str());
-	string line;
+	std::string classesFile = "./mask_rcnn_inception_v2_coco_2018_01_28/mscoco_labels.names";
+	std::ifstream ifs(classesFile.c_str());
+	std::string line;
 	while (getline(ifs, line)) classes.push_back(line);
 
 	// Load the colors
