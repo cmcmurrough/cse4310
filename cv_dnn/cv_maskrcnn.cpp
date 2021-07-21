@@ -77,6 +77,8 @@ int main(int argc, char **argv)
 
 
 
+
+
 	// Load names of classes
 	string classesFile = "./mask_rcnn_inception_v2_coco_2018_01_28/mscoco_labels.names";
 	ifstream ifs(classesFile.c_str());
@@ -98,8 +100,8 @@ int main(int argc, char **argv)
 	}
 
 	// define the configuration file paths
-	std::String textGraph = "./mask_rcnn_inception_v2_coco_2018_01_28.pbtxt";
-	std::String modelWeights = "./mask_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb";
+	std::string textGraph = "./mask_rcnn_inception_v2_coco_2018_01_28.pbtxt";
+	std::string modelWeights = "./mask_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb";
 
 	// load the DNN network
 	cv::dnn::Net network = readNetFromTensorflow(modelWeights, textGraph);
