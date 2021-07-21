@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <cstdio>
 #include <string.h>
 
 #include <opencv2/dnn.hpp>
