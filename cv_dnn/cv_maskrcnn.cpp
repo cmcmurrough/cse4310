@@ -114,8 +114,8 @@ int main(int argc, char **argv)
 	Mat frame, blob;
 
 	// Create a window
-	static const string kWinName = "Deep learning object detection in OpenCV";
-	namedWindow(kWinName, WINDOW_NORMAL);
+	//static const string kWinName = "Deep learning object detection in OpenCV";
+	//namedWindow(DISPLAY_WINDOW_NAME, WINDOW_NORMAL);
 
 	// Process frames.
 	while (waitKey(1) < 0)
@@ -159,7 +159,7 @@ int main(int argc, char **argv)
 		Mat detectedFrame;
 		frame.convertTo(detectedFrame, CV_8U);
 
-		imshow(kWinName, frame);
+		cv::imshow(DISPLAY_WINDOW_NAME, frame);
 
 	}
 	capture.release();
