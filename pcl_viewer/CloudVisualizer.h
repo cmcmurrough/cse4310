@@ -63,7 +63,7 @@ public:
     void addCloud(const pcl::PointCloud<pcl::PointXYZRGBA>::ConstPtr &cloudIn, double pointSize=1.0, const string &id="cloud", int viewPort=0);
     void updateCloud(const pcl::PointCloud<pcl::PointXYZRGBA>::ConstPtr &cloud, const string &id="cloud");
     void addCoordinateFrame(const Eigen::Vector4f &position, const Eigen::Quaternionf &orientation, double scale=1.0, const string &id="frame", int viewPort=0);
-    void addCoordinateFrame(double x, double y, double z, double roll, double pitch, double yaw, double scale=1.0, const string &id="frame", int viewPort=0);
+    //void addCoordinateFrame(double x, double y, double z, double roll, double pitch, double yaw, double scale=1.0, const string &id="frame", int viewPort=0);
     void addLine(double x1, double y1, double z1, double x2, double y2, double z2, double r=255.0, double g=255.0, double b=255.0, double opacity=1.0, double lineWidth=1.0, const string &id="line", int viewPort=0);
     void addPolygon(const pcl::PointCloud<pcl::PointXYZRGBA>::ConstPtr &vertices, double r=255.0, double g=255.0, double b=255.0, double opacity=1.0, double lineWidth=1.0, bool drawSolid=false, const string &id="polygon", int viewPort=0);
     void addBox(double x, double y, double z, double roll, double pitch, double yaw, double width, double height, double depth, double r=255.0, double g=255.0, double b=255.0, double opacity=1.0, double frameSize=1.0,  bool drawSolid=false, const string &id="box", int viewPort=0);

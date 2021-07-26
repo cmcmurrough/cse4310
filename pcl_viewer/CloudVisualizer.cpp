@@ -188,6 +188,7 @@ void CloudVisualizer::addCoordinateFrame(const Eigen::Vector4f &position, const 
  * @param[in] viewPort the viewPort id if using multiple viewports (default: 0)
  * @author Christopher D. McMurrough
  **********************************************************************************************************************/
+/*
 void CloudVisualizer::addCoordinateFrame(double x, double y, double z, double roll, double pitch, double yaw, double scale, const string &id, int viewPort)
 {
     // convert the roll, pitch, yaw angles to an affine transformation
@@ -197,6 +198,7 @@ void CloudVisualizer::addCoordinateFrame(double x, double y, double z, double ro
     // add the coordinate frame to the display
     myViewer->addCoordinateSystem(scale, transformation, id, viewPort);
 }
+*/
 
 /***********************************************************************************************************************
  * @brief Add a line to the display
