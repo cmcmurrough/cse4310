@@ -191,8 +191,9 @@ void CloudVisualizer::addCoordinateFrame(const Eigen::Vector4f &position, const 
 void CloudVisualizer::addCoordinateFrame(double x, double y, double z, double roll, double pitch, double yaw, double scale, const string &id, int viewPort)
 {
     // convert the roll, pitch, yaw angles to an affine transformation
-    Eigen::Affine3f transformation = pcl::getTransformation((float) x, (float) y, (float) z, (float) roll, (float) pitch, (float) yaw);
-
+    Eigen::Affine3f transformation;
+	pcl::getTransformation((float) x, (float) y, (float) z, (float) roll, (float) pitch, (float) yaw, transformation);
+	
     // add the coordinate frame to the display
     myViewer->addCoordinateSystem(scale, transformation, id, viewPort);
 }
