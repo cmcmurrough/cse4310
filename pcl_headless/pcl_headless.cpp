@@ -45,13 +45,13 @@
 bool openCloud(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloudOut, std::string fileName)
 {
     // handle various file types
-    std::string fileExtension = fileNameStr.substr(fileNameStr.find_last_of(".") + 1);
+    std::string fileExtension = fileName.substr(fileName.find_last_of(".") + 1);
     if(fileExtension.compare("pcd") == 0)
     {
         // attempt to open the file
-        if(pcl::io::loadPCDFile<pcl::PointXYZRGBA>(fileNameStr, *cloudOut) == -1)
+        if(pcl::io::loadPCDFile<pcl::PointXYZRGBA>(fileName, *cloudOut) == -1)
         {
-            PCL_ERROR("error while attempting to read pcd file: %s \n", fileNameStr.c_str());
+            PCL_ERROR("error while attempting to read pcd file: %s \n", fileName.c_str());
             return false;
         }
         else
@@ -62,9 +62,9 @@ bool openCloud(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloudOut, std::string fi
     else if(fileExtension.compare("ply") == 0)
     {
         // attempt to open the file
-        if(pcl::io::loadPLYFile<pcl::PointXYZRGBA>(fileNameStr, *cloudOut) == -1)
+        if(pcl::io::loadPLYFile<pcl::PointXYZRGBA>(fileName, *cloudOut) == -1)
         {
-            PCL_ERROR("error while attempting to read pcl file: %s \n", fileNameStr.c_str());
+            PCL_ERROR("error while attempting to read pcl file: %s \n", fileName.c_str());
             return false;
         }
         else
@@ -74,7 +74,7 @@ bool openCloud(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloudOut, std::string fi
     }
     else
     {
-        PCL_ERROR("error while attempting to read unsupported file: %s \n", fileNameStr.c_str());
+        PCL_ERROR("error while attempting to read unsupported file: %s \n", fileName.c_str());
         return false;
     }
 }
@@ -93,7 +93,7 @@ bool openCloud(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloudOut, std::string fi
 bool saveCloud(const pcl::PointCloud<pcl::PointXYZRGBA>::ConstPtr &cloudIn, std::string fileName, bool binaryMode)
 {
     // if the input cloud is empty, return
-    if(checkNumPoints(cloudIn) == 0)
+    if(cloudIn->points.size() == 0)
     {
         return false;
     }
