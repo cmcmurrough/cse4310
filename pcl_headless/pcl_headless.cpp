@@ -126,7 +126,7 @@ int main(int argc, char** argv)
         return 0;
     }
 	std::string inputFilePath(argv[1]);
-	std::string outputFilePath(argv[2])
+	std::string outputFilePath(argv[2]);
 
     // create a stop watch for measuring time
     pcl::StopWatch watch;
