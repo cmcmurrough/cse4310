@@ -90,7 +90,7 @@ bool openCloud(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloudOut, std::string fi
  * @return false if an error occured while writing file
  * @author Christopher D. McMurrough
  **********************************************************************************************************************/
-bool saveCloud(const pcl::PointCloud<pcl::PointXYZRGBA>::ConstPtr &cloudIn, std::string fileName, bool binaryMode)
+bool saveCloud(const pcl::PointCloud<pcl::PointXYZRGBA>::ConstPtr &cloudIn, std::string fileName, bool binaryMode=true)
 {
     // if the input cloud is empty, return
     if(cloudIn->points.size() == 0)
