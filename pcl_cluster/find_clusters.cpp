@@ -33,8 +33,8 @@
 
 #include <pcl/filters/voxel_grid.h>
 
-#include <pcl/kdtree/io.h>
 #include <pcl/kdtree/kdtree_flann.h>
+#include <pcl/kdtree/io.h>
 #include <pcl/segmentation/euclidean_cluster_comparator.h>
 #include <pcl/segmentation/extract_clusters.h>
 
