@@ -1,8 +1,9 @@
 # CSE 4310: Introduction to Computer Vision
 
-
 ![alt text](https://github.com/cmcmurrough/cse4310/blob/master/t800.jpg?raw=true)
 
+## Overview
+As the title implies, this course provides an introduction to computer vision. Honestly, a better title would be "Introduction to Computer Vision **Programming**", because I emphasize practical coding examples over rigorous theory. The outcome for this course is that all students should have a general understanding of how to combine common computer vision algorithms into more advanced processing pipelines of enhanced capability.
 
 ## Programming skills
 This class will involve regular, fairly intensive programming assignments. Roughly 50% of the assignments will require C++ OR Python skills, while the other 50% will require explicitly C++. All notes and example code will be written within the context of C++. In order to take this course, you must either be confident in your current C++ abilities or your ability to teach yourself a new language quickly.
