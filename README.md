@@ -1,6 +1,5 @@
 # CSE 4310: Introduction to Computer Vision
 
-:boom::boom::boom: THIS CLASS WON'T BE EASY, BUT YOU WILL LEARN TO DO REALLY COOL STUFF! :boom::boom::boom:
 
 ![alt text](https://github.com/cmcmurrough/cse4310/blob/master/t800.jpg?raw=true)
 
