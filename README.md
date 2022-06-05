@@ -2,6 +2,9 @@
 
 :boom::boom::boom: THIS CLASS WON'T BE EASY, BUT YOU WILL LEARN TO DO REALLY COOL STUFF! :boom::boom::boom:
 
+![alt text](https://github.com/cmcmurrough/cse4310/blob/main/terminator.jpg?raw=true)
+
+
 ## Programming skills
 This class will involve regular, fairly intensive programming assignments. Roughly 50% of the assignments will require C++ OR Python skills, while the other 50% will require explicitly C++. All notes and example code will be written within the context of C++. In order to take this course, you must either be confident in your current C++ abilities or your ability to teach yourself a new language quickly.
 
