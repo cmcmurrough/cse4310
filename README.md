@@ -10,26 +10,26 @@ The programming assignments will require time, focus, and dedication to complete
 ## Grading
 My goal as the instructor of this class is to instill as many computer/machine vision & perception skills in you as possible in a relatively short mount of time. I will grade you on the design of your solutions and the quality of your submitted code (formatting, adherence to standards, commenting, etc.). Class attendance will not be recorded, but absences will very likely negatively affect your performance on assignments. 
 
-Earning a grade of "A" in the class will be difficult, but not impossible. Students achieving this honor should consider computer vision as a possible career path.
+Earning a grade of "A" in the class will require functional, quality code submissions on each assignment. A thorough specificaion of requirements, along with the corresponding grading weights, is provided with each assignment.
 
 
 ## Some topics to be covered:
 1. Introduction to state-of-the-art computer vision techniques and applications
 2. Programming environment setup
 3. Data acquisition and display
-4. Image thresholding
-5. Morphology
-6. Motion detection & tracking
-7. Object recognition
-8. Optical character recognition
-9. Camera calibration and fiducial markers
-9. Depth and 3D sensing techniques and hardware
+4. Image thresholding, morphology
+5. Edges, lines, RANSAC
+7. Motion detection & tracking
+8. Feature detection & object recognition
+9. Optical character recognition
+10. Camera calibration & fiducial markers
+11. Depth and 3D sensing techniques and hardware
 19. Point clouds
-10. Segmentation
-11. Registration
-12. Performance considerations
-13. Parallel Processing
-14. Emerging technologies
+13. Segmentation
+14. Registration
+15. Performance considerations
+16. Parallel Processing
+17. Emerging technologies
 
 ## Libraries and frameworks
 1. OpenCV
