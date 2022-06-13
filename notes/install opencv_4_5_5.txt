@@ -1,4 +1,4 @@
-### INSTAL OPENCV DEPENDENCIES ***
+### INSTALL OPENCV DEPENDENCIES ***
 sudo apt-get install build-essential libtbb-dev libgtk2.0-dev pkg-config python-numpy python3-numpy
 
 ### GET OPENCV SOURCE (RELEASE 4.5.5) ###
