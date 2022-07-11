@@ -33,6 +33,9 @@
 #define NUM_COMNMAND_LINE_ARGUMENTS 1
 #define DISPLAY_WINDOW_NAME "Video Frame"
 
+// define the list of class names
+std::vector<std::string> classes;
+
 // declare function prototypes
 bool processFrame(const cv::Mat &imageIn, cv::Mat &imageOut);
 
@@ -100,7 +103,8 @@ bool processFrame(const cv::Mat &imageIn, cv::Mat &imageOut, cv::dnn::Net &netwo
 
             // annotate the image
             std::stringstream ss;
-            ss << maxPos.x;
+            //ss << maxPos.x;
+            ss << classes.at(maxPos.x);
             std::string clas = ss.str();
             int color = maxPos.x * 10;
             cv::putText(imageOut, clas, cv::Point(left, top), 1, 2, cv::Scalar(color, 255, 255), 2, false);
@@ -156,14 +160,14 @@ int main(int argc, char **argv)
     cv::namedWindow(DISPLAY_WINDOW_NAME, cv::WINDOW_AUTOSIZE);
 
     // initialize YOLO
-    std::string model = "yolov3-tiny.weights";
-    std::string config = "yolov3-tiny.cfg";
-    cv::dnn::Net network = cv::dnn::readNet(model, config, "Darknet");
+    std::string model_file = "yolov3-tiny.weights";
+    std::string config_file = "yolov3-tiny.cfg";
+    cv::dnn::Net network = cv::dnn::readNet(model_file, config_file, "Darknet");
     network.setPreferableBackend(cv::dnn::DNN_BACKEND_DEFAULT);
     network.setPreferableTarget(cv::dnn::DNN_TARGET_OPENCL);
     
     // load the class label names
-    std::string classes = "mscoco_labels.names.txt";
+    std::string classes_file = "mscoco_labels.names.txt";
     std::ifstream ifs(classesFile.c_str());
     std::string line;
     while(std::getline(ifs, line)) classes.push_back(line);
