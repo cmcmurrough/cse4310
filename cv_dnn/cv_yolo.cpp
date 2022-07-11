@@ -24,6 +24,7 @@
 // include necessary dependencies
 #include <iostream>
 #include <cstdio>
+#include <fstream>
 #include "opencv2/opencv.hpp"
 #include <opencv2/dnn.hpp>
 #include <opencv2/imgproc.hpp>
@@ -103,15 +104,13 @@ bool processFrame(const cv::Mat &imageIn, cv::Mat &imageOut, cv::dnn::Net &netwo
 
             // annotate the image
             std::stringstream ss;
-            //ss << maxPos.x;
             ss << classes.at(maxPos.x);
             std::string clas = ss.str();
-            int color = maxPos.x * 10;
-            cv::putText(imageOut, clas, cv::Point(left, top), 1, 2, cv::Scalar(color, 255, 255), 2, false);
+            cv::putText(imageOut, clas, cv::Point(left, top), 1, 2, cv::Scalar(0, 255, 255), 2, false);
             std::stringstream ss2;
             ss << confidence;
             std::string conf = ss.str();
-            cv::rectangle(imageOut, cv::Rect(left, top, width, height), cv::Scalar(color, 0, 0), 2, 8, 0);
+            cv::rectangle(imageOut, cv::Rect(left, top, width, height), cv::Scalar(0, 128, 255), 2, 8, 0);
         }
     }
 
