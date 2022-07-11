@@ -168,7 +168,7 @@ int main(int argc, char **argv)
     
     // load the class label names
     std::string classes_file = "mscoco_labels.names.txt";
-    std::ifstream ifs(classesFile.c_str());
+    std::ifstream ifs(classes_file.c_str());
     std::string line;
     while(std::getline(ifs, line)) classes.push_back(line);
 
