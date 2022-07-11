@@ -163,6 +163,12 @@ int main(int argc, char **argv)
     cv::dnn::Net network = cv::dnn::readNet(model, config, "Darknet");
     network.setPreferableBackend(cv::dnn::DNN_BACKEND_DEFAULT);
     network.setPreferableTarget(cv::dnn::DNN_TARGET_OPENCL);
+    
+    // load the class label names
+    std::string classes = "mscoco_labels.names.txt";
+    std::ifstream ifs(classesFile.c_str());
+    std::string line;
+    while(std::getline(ifs, line)) classes.push_back(line);
 
     // process data until program termination
     bool doCapture = true;
