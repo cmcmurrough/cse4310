@@ -16,8 +16,11 @@ while(True):
     # check to see if we received a valid frame
     if success:
 
+        edges = cv2.Canny(frame, 100, 200)
+
         # Display the resulting frame
         cv2.imshow('frame', frame)
+        cv2.imshow('edges', edges)
 
         # check for 'q' key press
         key = cv2.waitKey(1)
