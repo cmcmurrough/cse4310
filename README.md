@@ -1,6 +1,6 @@
 # CSE 4310: Introduction to Computer Vision
 
-![alt text](https://github.com/cmcmurrough/cse4310/blob/master/t800.jpg?raw=true)
+![Learn to make this](https://github.com/cmcmurrough/cse4310/blob/master/t800.jpg?raw=true)
 
 ## Overview
 As the title implies, this course provides an introduction to computer vision. Honestly, a better title would be "Introduction to Computer Vision **Programming**", because I emphasize practical coding examples over rigorous theory. The outcome for this course is that all students should have a general understanding of how to combine common computer vision algorithms into more advanced processing pipelines of enhanced capability.
