@@ -3,7 +3,7 @@ sudo apt-get install freeglut3-dev libboost-all-dev libeigen3-dev libflann-dev l
 
 ﻿### GET PCL SOURCE ###
 cd ~
-git clone https://github.com/PointCloudLibrary/pcl -b pcl-1.12.1
+git clone https://github.com/PointCloudLibrary/pcl -b pcl-1.13.1
 cd pcl
 
 ### BUILD AND INSTALL PCL ###
